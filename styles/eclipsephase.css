@@ -1,0 +1,950 @@
+/* ================================================================
+   ECLIPSE PHASE — Système Foundry VTT v13
+   CSS complet — thème sombre transhumaniste
+   ================================================================ */
+
+/* ── Variables ─────────────────────────────────────────────────── */
+:root {
+  --ep-bg:        #0e1017;
+  --ep-bg-mid:    #13161f;
+  --ep-bg-panel:  #181c28;
+  --ep-bg-row:    #1c2030;
+  --ep-bg-alt:    #191d2a;
+  --ep-border:    #2c3550;
+  --ep-border2:   #3a4a70;
+  --ep-accent:    #3a80c8;
+  --ep-accent2:   #5ba3e8;
+  --ep-glow:      rgba(58,128,200,0.2);
+  --ep-gold:      #c8a23a;
+  --ep-gold2:     #e8c05b;
+  --ep-red:       #c03838;
+  --ep-red2:      #e05858;
+  --ep-green:     #38a860;
+  --ep-green2:    #58c880;
+  --ep-text:      #c8d0e8;       /* texte principal — clair sur fond sombre */
+  --ep-text2:     #8898bc;       /* texte secondaire */
+  --ep-text3:     #4a5878;       /* texte discret */
+  --ep-bright:    #e8f0ff;       /* texte en évidence */
+  --ep-font:      'Segoe UI', 'Roboto', Arial, sans-serif;
+  --ep-mono:      'Courier New', monospace;
+  --ep-r:         4px;
+  --ep-r2:        6px;
+}
+
+/* ── Reset base ─────────────────────────────────────────────────── */
+.eclipse-phase.sheet * { box-sizing: border-box; }
+.eclipse-phase.sheet {
+  background: var(--ep-bg);
+  color: var(--ep-text);
+  font-family: var(--ep-font);
+  font-size: 13px;
+  line-height: 1.3;
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-r2);
+  overflow: hidden;
+}
+
+/* ── Inputs & selects ────────────────────────────────────────────── */
+.eclipse-phase.sheet input,
+.eclipse-phase.sheet select,
+.eclipse-phase.sheet textarea {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-r);
+  color: var(--ep-text);
+  font-family: var(--ep-font);
+  font-size: 12px;
+  padding: 2px 5px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.eclipse-phase.sheet input:focus,
+.eclipse-phase.sheet select:focus,
+.eclipse-phase.sheet textarea:focus {
+  border-color: var(--ep-accent);
+  box-shadow: 0 0 5px var(--ep-glow);
+  outline: none;
+  color: var(--ep-bright);
+}
+.eclipse-phase.sheet textarea { resize: vertical; width: 100%; min-height: 50px; }
+.eclipse-phase.sheet select   { cursor: pointer; }
+.eclipse-phase.sheet input[type="number"] { text-align: center; }
+.eclipse-phase.sheet label { color: var(--ep-text2); font-size: 11px; }
+
+/* ── Buttons ─────────────────────────────────────────────────────── */
+.eclipse-phase.sheet button {
+  background: linear-gradient(135deg, #202a44, #161e36);
+  border: 1px solid var(--ep-border2);
+  border-radius: var(--ep-r);
+  color: var(--ep-text);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 3px 10px;
+  transition: background .15s, border-color .15s;
+}
+.eclipse-phase.sheet button:hover {
+  background: linear-gradient(135deg, #2a3a58, #202e48);
+  border-color: var(--ep-accent);
+  color: var(--ep-bright);
+}
+.ep-btn-small { font-size: 11px; padding: 3px 8px; white-space: nowrap; }
+
+/* ── Scrollbar ───────────────────────────────────────────────────── */
+.eclipse-phase.sheet ::-webkit-scrollbar { width: 5px; }
+.eclipse-phase.sheet ::-webkit-scrollbar-track { background: var(--ep-bg); }
+.eclipse-phase.sheet ::-webkit-scrollbar-thumb { background: var(--ep-border); border-radius: 3px; }
+.eclipse-phase.sheet ::-webkit-scrollbar-thumb:hover { background: var(--ep-accent); }
+
+/* ================================================================
+   EN-TÊTE
+   ================================================================ */
+.ep-header {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: linear-gradient(180deg, #0c1018 0%, var(--ep-bg-mid) 100%);
+  border-bottom: 2px solid var(--ep-accent);
+}
+
+/* Photo */
+.ep-header .profile-img {
+  width: 70px;
+  height: 70px;
+  border: 2px solid var(--ep-accent);
+  border-radius: var(--ep-r);
+  object-fit: cover;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px var(--ep-glow);
+  align-self: flex-start;
+}
+
+/* Bloc identité + photo */
+.ep-header-left {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 310px;
+}
+.ep-identity { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+
+.ep-field-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ep-field-row label {
+  flex-shrink: 0;
+  width: 90px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--ep-text2);
+  letter-spacing: .3px;
+}
+.ep-field-row input {
+  flex: 1;
+  font-size: 12px;
+  min-width: 0;
+}
+.charname {
+  font-size: 15px !important;
+  font-weight: bold;
+  color: var(--ep-bright) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--ep-border) !important;
+  border-radius: 0 !important;
+  padding-bottom: 2px;
+}
+.charname:focus { border-bottom-color: var(--ep-accent) !important; }
+
+.ep-field-row-sm { flex-wrap: wrap; }
+.ep-aud-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.ep-aud-btn {
+  width: 22px; height: 20px;
+  padding: 0 !important;
+  font-size: 14px;
+  font-weight: bold;
+}
+.ep-aud-pts {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--ep-gold2);
+  min-width: 28px;
+  text-align: center;
+}
+
+/* Bloc aptitudes + caractéristiques (droite) */
+.ep-header-right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Label section ──── */
+.ep-section-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ep-accent2);
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+/* ================================================================
+   TABLE DES APTITUDES
+   ================================================================ */
+.ep-apt-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.ep-apt-lbl-col { width: 90px; }
+.ep-apt-col     { width: calc((100% - 90px) / 7); min-width: 36px; }
+
+.ep-apt-table th {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--ep-accent2);
+  text-align: center;
+  padding: 2px 1px;
+  border-bottom: 1px solid var(--ep-accent);
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+.ep-apt-table td {
+  padding: 1px 1px;
+  vertical-align: middle;
+}
+.ep-apt-row-lbl {
+  font-size: 10px;
+  color: var(--ep-text2);
+  text-align: right;
+  padding-right: 6px !important;
+  white-space: nowrap;
+}
+
+/* Inputs dans la table des aptitudes */
+.ep-apt-inp {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--ep-text) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid var(--ep-border) !important;
+  border-radius: 3px;
+  padding: 1px !important;
+}
+.ep-apt-inp:focus { border-color: var(--ep-accent) !important; color: var(--ep-bright) !important; }
+
+/* Ligne Bonus de Morphe / Bonus divers */
+.ep-apt-bonus-row .ep-apt-inp {
+  font-size: 12px;
+  color: var(--ep-accent2) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+.ep-apt-bonus-row .ep-apt-inp:focus { border-color: var(--ep-border) !important; }
+
+/* Ligne Total */
+.ep-apt-total-row td { padding: 1px 1px; }
+.ep-apt-total {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--ep-bright);
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 0 2px;
+  transition: color .15s, background .15s;
+}
+.ep-apt-total:hover { color: var(--ep-accent2); background: var(--ep-glow); }
+
+/* ── Formules inter-blocs ─── */
+.ep-carac-formulas {
+  font-size: 10px;
+  color: var(--ep-text2);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1px 0;
+}
+.ep-formula-accent { color: var(--ep-gold2); font-weight: bold; }
+.ep-carac-formula-sep { color: var(--ep-text3); }
+
+/* ================================================================
+   CARACTÉRISTIQUES — bande horizontale
+   ================================================================ */
+.ep-carac-row {
+  display: flex;
+  align-items: stretch;
+  gap: 3px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.ep-carac-vsep {
+  width: 1px;
+  background: var(--ep-border2);
+  margin: 0 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.ep-carac-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--ep-bg-panel);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-r);
+  padding: 3px 5px;
+  min-width: 48px;
+  flex-shrink: 0;
+  gap: 1px;
+}
+.ep-carac-box:hover { border-color: var(--ep-border2); }
+
+/* Couleurs de groupe */
+.ep-carac-ego    { border-color: rgba(200,162,58,.3); }
+.ep-carac-morphe { border-color: rgba(58,180,100,.3); }
+.ep-carac-primary { background: rgba(30,25,60,.5); }
+
+.ep-carac-lbl {
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--ep-accent2);
+  letter-spacing: .5px;
+}
+.ep-carac-ego    .ep-carac-lbl { color: var(--ep-gold2); }
+.ep-carac-morphe .ep-carac-lbl { color: #6cd0a0; }
+
+.ep-carac-val {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--ep-bright);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ep-carac-input {
+  width: 40px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--ep-bright) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--ep-accent) !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+.ep-carac-input:focus { box-shadow: none !important; }
+
+.ep-carac-form {
+  font-size: 8px;
+  color: var(--ep-text3);
+  font-family: var(--ep-mono);
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1;
+}
+.ep-carac-form-sm {
+  font-size: 7px;
+  color: var(--ep-text3);
+  font-family: var(--ep-mono);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.ep-init-neg {
+  font-size: 11px;
+  color: var(--ep-red2);
+  margin-left: 1px;
+}
+
+/* ── Sous-formules ─── */
+.ep-carac-sub-formulas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 9px;
+  color: var(--ep-text3);
+  margin-top: 2px;
+}
+.ep-fa { color: var(--ep-gold); font-weight: bold; }
+
+/* ================================================================
+   DOMMAGES / BLESSURES + STRESS / TRAUMAS
+   ================================================================ */
+.ep-dsbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ep-ds-phys,
+.ep-ds-mental {
+  flex: 1;
+  min-width: 180px;
+  background: var(--ep-bg-panel);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-r);
+  padding: 4px 7px;
+}
+.ep-ds-phys   { border-color: rgba(192,56,56,.4); }
+.ep-ds-mental { border-color: rgba(58,128,200,.4); }
+
+.ep-ds-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 3px;
+  color: var(--ep-text2);
+}
+.ep-ds-phys   .ep-ds-labels { color: #e08080; }
+.ep-ds-mental .ep-ds-labels { color: var(--ep-accent2); }
+
+.ep-ds-vals {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.ep-ds-input {
+  width: 52px;
+  font-size: 20px !important;
+  font-weight: bold;
+  color: var(--ep-red2) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--ep-red) !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  text-align: center;
+}
+.ep-ds-input-mental { color: var(--ep-accent2) !important; border-bottom-color: var(--ep-accent) !important; }
+.ep-ds-input:focus  { box-shadow: none !important; }
+
+.ep-ds-sep   { font-size: 12px; color: var(--ep-text2); white-space: nowrap; }
+.ep-ds-hints { font-size: 9px; color: var(--ep-text3); margin-top: 2px; }
+
+.ep-ds-badge {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--ep-gold2);
+  min-width: 16px;
+  text-align: center;
+}
+.ep-ds-badge-mental { color: var(--ep-accent2); }
+
+.ep-malus-tag {
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: rgba(192,56,56,.2);
+  color: var(--ep-red2);
+  font-weight: bold;
+  white-space: nowrap;
+}
+.ep-malus-mental { background: rgba(58,128,200,.15); color: var(--ep-accent2); }
+
+/* Armure mini */
+.ep-ds-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+.ep-armor-mini {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--ep-text2);
+}
+.ep-armor-inp {
+  width: 38px;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* ================================================================
+   ONGLETS
+   ================================================================ */
+.eclipse-phase.sheet .sheet-tabs {
+  background: var(--ep-bg-mid);
+  border-bottom: 1px solid var(--ep-border);
+  display: flex;
+  padding: 0 10px;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.eclipse-phase.sheet .sheet-tabs .item {
+  padding: 6px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  color: var(--ep-text2);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.eclipse-phase.sheet .sheet-tabs .item:hover  { color: var(--ep-text); }
+.eclipse-phase.sheet .sheet-tabs .item.active { color: var(--ep-accent2); border-bottom-color: var(--ep-accent); }
+
+/* ── Body ─── */
+.eclipse-phase.sheet .sheet-body {
+  padding: 8px 10px;
+  background: var(--ep-bg);
+  overflow-y: auto;
+  max-height: 520px;
+}
+.eclipse-phase.sheet .tab { display: none; }
+.eclipse-phase.sheet .tab.active { display: block; }
+
+/* ================================================================
+   TABLEAU DES COMPÉTENCES
+   ================================================================ */
+.ep-skill-legend {
+  font-size: 11px;
+  color: var(--ep-text2);
+  margin-bottom: 6px;
+  padding: 4px 6px;
+  background: var(--ep-bg-panel);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-r);
+  line-height: 1.5;
+}
+.ep-skill-legend kbd {
+  background: var(--ep-bg-row);
+  border: 1px solid var(--ep-border);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-family: var(--ep-mono);
+  font-size: 10px;
+  color: var(--ep-text);
+}
+.ep-skill-legend b { color: var(--ep-accent2); }
+
+.ep-skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* En-têtes */
+.ep-skills-table thead tr {
+  background: var(--ep-bg-mid);
+  border-bottom: 2px solid var(--ep-accent);
+}
+.ep-skills-table th {
+  padding: 5px 4px;
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  color: var(--ep-accent2);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ep-th-nom  { width: 34%; }
+.ep-th-apt  { width: 52px;  text-align: center; }
+.ep-th-base { width: 68px;  text-align: center; }
+.ep-th-num  { width: 52px;  text-align: center; }
+.ep-th-total{ width: 52px;  text-align: center; }
+.ep-th-spec { width: auto; }
+
+/* Lignes */
+.ep-skill-row {
+  border-bottom: 1px solid var(--ep-border);
+  transition: background .1s;
+}
+.ep-skill-row:nth-child(even) { background: var(--ep-bg-alt); }
+.ep-skill-row:hover { background: rgba(58,128,200,.06); }
+.ep-skill-row td { padding: 3px 4px; vertical-align: middle; }
+
+/* Cellule NOM */
+.ep-td-nom {
+  display: table-cell;  /* force table-cell dans le contexte table */
+  vertical-align: middle;
+}
+.ep-nd-dot {
+  color: var(--ep-gold);
+  font-size: 11px;
+  margin-right: 3px;
+}
+.ep-skill-name-static {
+  color: var(--ep-text);
+  font-size: 12px;
+}
+.ep-skill-name-inp {
+  width: 100%;
+  background: transparent;
+  border: none !important;
+  border-bottom: 1px dashed transparent !important;
+  color: var(--ep-text) !important;
+  font-size: 12px;
+  padding: 1px 2px;
+  border-radius: 0 !important;
+}
+.ep-skill-name-inp:focus { border-bottom-color: var(--ep-accent) !important; box-shadow: none !important; }
+.ep-skill-name-inp::placeholder { color: var(--ep-text3); font-style: italic; }
+
+/* Cellule APT */
+.ep-td-apt {
+  text-align: center;
+  white-space: nowrap;
+}
+.ep-apt-abr {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--ep-accent2);
+  letter-spacing: .3px;
+  line-height: 1.2;
+}
+.ep-apt-val {
+  display: block;
+  font-size: 11px;
+  color: var(--ep-text2);
+  line-height: 1.2;
+}
+
+/* Cellule BASE */
+.ep-td-base { text-align: center; }
+.ep-base-inp {
+  width: 56px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--ep-text) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid var(--ep-border) !important;
+  border-radius: var(--ep-r);
+}
+.ep-base-inp:focus { color: var(--ep-bright) !important; border-color: var(--ep-accent) !important; }
+.ep-base-inp::placeholder { color: var(--ep-text3); font-style: italic; font-size: 11px; }
+
+/* Cellule Morphe / numérique */
+.ep-td-num { text-align: center; }
+.ep-num-inp {
+  width: 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ep-text) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--ep-border) !important;
+  border-radius: 0 !important;
+  padding: 1px !important;
+}
+.ep-num-inp:focus { border-bottom-color: var(--ep-accent) !important; box-shadow: none !important; }
+
+/* Cellule TOTAL — cliquable */
+.ep-td-total { text-align: center; }
+.ep-skill-total {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--ep-bright);
+  cursor: pointer;
+  border-radius: var(--ep-r);
+  padding: 1px 6px;
+  transition: color .15s, background .15s;
+  user-select: none;
+}
+.ep-skill-total:hover { color: var(--ep-accent2); background: var(--ep-glow); }
+
+/* Cellule SPEC — input texte + number sur même ligne */
+.ep-td-spec { white-space: nowrap; }
+.ep-spec-inp {
+  width: 70%;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px dashed var(--ep-border) !important;
+  color: var(--ep-text2) !important;
+  font-size: 11px;
+  padding: 1px 2px;
+  border-radius: 0 !important;
+}
+.ep-spec-inp:focus { border-bottom-color: var(--ep-accent) !important; color: var(--ep-text) !important; box-shadow: none !important; }
+.ep-spec-inp::placeholder { color: var(--ep-text3); }
+/* Le champ "autres_bonus" numérique s'affiche à droite de la spécialisation */
+.ep-td-spec .ep-num-inp { width: 32px; display: inline-block; vertical-align: middle; }
+
+/* Ligne "non utilisable par défaut" */
+.ep-nd .ep-skill-name-static,
+.ep-nd .ep-skill-name-inp { color: var(--ep-text2); font-style: italic; }
+
+/* ================================================================
+   ONGLET RÉPUTATION
+   ================================================================ */
+.ep-rep-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ep-rep-table th {
+  background: var(--ep-bg-mid);
+  border-bottom: 1px solid var(--ep-accent);
+  padding: 4px 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--ep-accent2);
+  text-align: left;
+}
+.ep-rep-table td { padding: 4px 8px; border-bottom: 1px solid var(--ep-border); color: var(--ep-text); }
+.ep-rep-table tr:nth-child(even) td { background: var(--ep-bg-alt); }
+.ep-rep-table input[type="number"] { width: 60px; }
+
+/* ================================================================
+   ONGLET ÉQUIPEMENT & MORPHE
+   ================================================================ */
+.ep-morphe-card {
+  background: var(--ep-bg-panel);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-r);
+  padding: 8px;
+  margin-bottom: 8px;
+}
+.ep-readonly-display {
+  display: inline-block;
+  color: var(--ep-text);
+  font-size: 12px;
+  padding: 2px 5px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed var(--ep-border);
+  border-radius: var(--ep-r);
+  min-height: 22px;
+  min-width: 60px;
+  font-style: italic;
+}
+
+/* Items (drag & drop) */
+.ep-items-list { display: flex; flex-direction: column; gap: 3px; margin: 5px 0; }
+.ep-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 7px;
+  background: var(--ep-bg-row);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--ep-r);
+  transition: border-color .15s;
+}
+.ep-item:hover { border-color: var(--ep-accent); }
+.ep-item-img  { width: 22px; height: 22px; border-radius: 3px; object-fit: cover; border: 1px solid var(--ep-border); flex-shrink: 0; }
+.ep-item-name { flex: 1; font-size: 12px; color: var(--ep-text); }
+.ep-item-type { font-size: 11px; color: var(--ep-text2); }
+.ep-item-controls { display: flex; gap: 6px; opacity: 0; transition: opacity .15s; }
+.ep-item:hover .ep-item-controls { opacity: 1; }
+.ep-item-controls i { cursor: pointer; color: var(--ep-text2); font-size: 12px; transition: color .15s; }
+.ep-item-controls .item-edit:hover   { color: var(--ep-accent2); }
+.ep-item-controls .item-delete:hover { color: var(--ep-red2); }
+
+/* ================================================================
+   LAYOUT COMMUN
+   ================================================================ */
+.ep-section-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ep-accent2);
+  margin: 10px 0 5px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--ep-border);
+  font-weight: bold;
+}
+.ep-two-col { display: flex; gap: 12px; }
+.ep-col     { flex: 1; min-width: 0; }
+.ep-form-group { margin-bottom: 7px; }
+.ep-form-group label { display: block; margin-bottom: 2px; }
+.ep-form-group small { color: var(--ep-text3); font-size: 10px; }
+.ep-empty { color: var(--ep-text3); font-style: italic; font-size: 12px; padding: 4px 0; }
+
+/* ================================================================
+   CHAT — JETS D100
+   ================================================================ */
+.ep-chat-roll {
+  background: var(--ep-bg-panel);
+  border: 1px solid var(--ep-border);
+  border-left: 3px solid var(--ep-accent);
+  border-radius: var(--ep-r);
+  padding: 7px 10px;
+  font-family: var(--ep-font);
+}
+.ep-roll-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ep-border);
+}
+.ep-actor-name { font-weight: bold; color: var(--ep-accent2); font-size: 13px; }
+.ep-skill-name { color: var(--ep-text); font-size: 12px; }
+.ep-roll-body  { display: flex; align-items: center; gap: 10px; }
+.ep-roll-dice  {
+  font-size: 28px;
+  font-weight: bold;
+  font-family: var(--ep-mono);
+  color: var(--ep-bright);
+  background: var(--ep-bg);
+  border: 2px solid var(--ep-border);
+  border-radius: var(--ep-r);
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ep-roll-details { flex: 1; }
+.ep-roll-target  { font-size: 12px; color: var(--ep-text2); margin-bottom: 4px; }
+.ep-roll-target b { color: var(--ep-text); }
+.ep-roll-result  {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: var(--ep-r);
+  display: inline-block;
+}
+.ep-reussite { color: var(--ep-green2); background: rgba(56,168,96,.1); }
+.ep-echec    { color: var(--ep-red2);   background: rgba(192,56,56,.1); }
+.ep-critique-reussite { color: var(--ep-gold2); background: rgba(200,162,58,.15); box-shadow: 0 0 6px rgba(200,162,58,.25); }
+.ep-critique-echec    { color: #ff7070;         background: rgba(192,56,56,.2);  box-shadow: 0 0 6px rgba(192,56,56,.3); }
+.ep-roll-double { font-size: 11px; color: var(--ep-gold); margin-top: 2px; }
+.ep-roll-oppose { flex-direction: column; gap: 5px; }
+.ep-roll-actor  { padding: 5px 8px; border-radius: var(--ep-r); border: 1px solid var(--ep-border); font-size: 12px; }
+.ep-roll-vs     { text-align: center; font-weight: bold; color: var(--ep-text2); font-size: 11px; }
+
+/* ================================================================
+   FICHES ITEMS
+   ================================================================ */
+.ep-item-sheet {
+  padding: 10px;
+  background: var(--ep-bg);
+  color: var(--ep-text);
+  font-family: var(--ep-font);
+}
+.ep-item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ep-accent);
+}
+.ep-item-header .item-img {
+  width: 52px; height: 52px;
+  border: 2px solid var(--ep-accent);
+  border-radius: var(--ep-r);
+  object-fit: cover;
+  cursor: pointer;
+}
+.ep-item-header .item-name {
+  flex: 1;
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ep-border);
+  color: var(--ep-bright);
+  padding: 2px 0 3px;
+}
+
+/* ================================================================
+   FIXES LAYOUT — Champs Identité/Age + Bouton dommages chat
+   ================================================================ */
+
+/* Identité sexuelle et Âge : champs plus lisibles */
+.ep-field-row-sm label  { font-size: 10px; white-space: nowrap; }
+.ep-field-row-sm input[type="text"]   { min-width: 80px; }
+.ep-field-row-sm input[type="number"] { min-width: 50px; }
+
+/* Fix général : tous les inputs ont au moins 50px de large */
+.ep-identity input[type="text"],
+.ep-identity input[type="number"] {
+  min-width: 50px;
+}
+
+/* Bouton dommages dans le chat */
+.ep-chat-roll button {
+  background: linear-gradient(135deg, #5a1515, #3a0a0a);
+  border: 1px solid #a03030;
+  color: #f08080;
+  padding: 4px 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-top: 6px;
+  transition: background .15s, border-color .15s;
+}
+.ep-chat-roll button:hover {
+  background: linear-gradient(135deg, #7a2020, #5a1515);
+  border-color: #d04040;
+  color: #ffaaaa;
+}
+
+/* Fiche NPC */
+.ep-npc-sheet .ep-npc-header {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: linear-gradient(180deg, #0c1018 0%, var(--ep-bg-mid) 100%);
+  border-bottom: 2px solid var(--ep-accent);
+  align-items: flex-start;
+}
+.ep-npc-sheet .ep-npc-info { flex: 1; min-width: 0; }
+.ep-npc-sheet .ep-npc-aptitudes {
+  background: var(--ep-bg-mid);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--ep-border);
+}
+.ep-npc-sheet .ep-npc-stats-row {
+  padding: 6px 10px;
+  background: var(--ep-bg-mid);
+  border-bottom: 1px solid var(--ep-border);
+}
+.ep-npc-sheet .ep-npc-carac-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.ep-npc-sheet .ep-sheet-body { max-height: 280px; }
+
+/* Dialog formule détaillée */
+.ep-roll-detail-table { width: 100%; border-collapse: collapse; }
+.ep-roll-detail-table td { padding: 2px 6px; font-size: 11px; }
+
+/* Item arme dans la fiche PNJ */
+.ep-item-dmg {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--ep-red2);
+}
+
+/* Skill total clickable dans PNJ */
+.skill-roll-npc { cursor: pointer; }
+.skill-roll-npc:hover { color: var(--ep-accent2); background: var(--ep-glow); }
+
+/* Badge : bonus de morphe d'aptitude affiché dans la colonne Morphe des compétences */
+.ep-apt-morphe-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--ep-accent2);
+  background: rgba(58, 128, 200, 0.12);
+  border: 1px solid rgba(58, 128, 200, 0.35);
+  border-radius: 3px;
+  padding: 0 3px;
+  margin-right: 2px;
+  vertical-align: middle;
+}

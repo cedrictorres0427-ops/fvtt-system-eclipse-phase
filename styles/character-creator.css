@@ -1,0 +1,263 @@
+/* ── Eclipse Phase Character Creator ───────────────────────────── */
+.ep-creator { background: #0d1117 !important; color: #c9d1d9 !important; font-family: "Segoe UI", sans-serif; }
+.ep-creator .window-content { padding: 0 !important; overflow: hidden; display: flex; flex-direction: column; height: 100%; background: #0d1117 !important; color: #c9d1d9 !important; }
+
+/* Nav */
+.ep-wizard { display: flex; flex-direction: column; height: 100%; overflow: hidden; background: #0d1117; color: #c9d1d9; }
+.ep-wiz-nav {
+  display: flex; background: #161b22; border-bottom: 1px solid #21262d;
+  overflow-x: auto; flex-shrink: 0;
+}
+.ep-wiz-step-btn {
+  display: flex; align-items: center; gap:5px; padding: 8px 14px;
+  background: none; border: none; color: #8b949e; cursor: pointer;
+  border-bottom: 2px solid transparent; white-space: nowrap; font-size:11px;
+  transition: all .15s;
+}
+.ep-wiz-step-btn:hover { color: #c9d1d9; }
+.ep-wiz-step-btn.active { color: #58a6ff; border-bottom-color: #58a6ff; }
+.ep-wiz-step-btn.done .ep-wiz-step-num { background: #238636; }
+.ep-wiz-step-num {
+  width:18px;height:18px;border-radius:50%;background:#21262d;
+  display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;
+}
+
+/* Body */
+.ep-wiz-body { flex:1; overflow-y:auto; padding:16px 20px; min-height:0; background:#0d1117; color:#c9d1d9; }
+.ep-wiz-panel { display:none; }
+.ep-wiz-panel.active { display:block; }
+.ep-wiz-title { font-size:16px; font-weight:700; color:#58a6ff; margin:0 0 8px; }
+.ep-wiz-hint  { font-size:12px; color:#8b949e; margin:0 0 16px; }
+.ep-wiz-hint-sm { font-size:11px; color:#8b949e; margin:0 0 8px; }
+
+/* Cards historique/faction */
+.ep-wiz-grid-hist { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; }
+.ep-wiz-card { cursor:pointer; }
+.ep-wiz-card input[type=radio] { display:none; }
+.ep-wiz-card-inner {
+  padding:10px; border:1px solid #21262d; border-radius:6px;
+  background:#161b22; transition:all .15s;
+}
+.ep-wiz-card:hover .ep-wiz-card-inner { border-color:#58a6ff; }
+.ep-wiz-card.selected .ep-wiz-card-inner { border-color:#58a6ff; background:#0d2137; }
+.ep-wiz-card-title  { font-weight:700; color:#c9d1d9; font-size:12px; margin-bottom:4px; }
+.ep-wiz-card-bonus  { font-size:10px; color:#8b949e; line-height:1.4; }
+.ep-wiz-card-morphes{ font-size:10px; color:#3fb950; margin-top:4px; }
+
+/* Aptitudes */
+.ep-wiz-apt-info { display:flex; justify-content:space-between; align-items:center;
+  padding:8px 12px; background:#161b22; border-radius:6px; margin-bottom:12px; font-size:12px; }
+.ep-pts-apt-remaining { color:#58a6ff; font-size:16px; font-weight:700; }
+.ep-wiz-rule { color:#8b949e; font-size:11px; }
+.ep-wiz-apts { display:grid; gap:6px; }
+.ep-wiz-apt-row {
+  display:grid; grid-template-columns:120px 28px 56px 28px 1fr;
+  align-items:center; gap:6px;
+}
+.ep-wiz-apt-lbl { font-weight:700; color:#c9d1d9; font-size:12px; }
+.ep-wiz-apt-lbl small { display:block; color:#8b949e; font-size:10px; font-weight:400; }
+.ep-apt-btn {
+  width:26px;height:26px;border-radius:4px;background:#21262d;border:1px solid #30363d;
+  color:#c9d1d9;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;
+  transition:background .1s;
+}
+.ep-apt-btn:hover { background:#58a6ff; color:#0d1117; }
+.ep-apt-input {
+  width:50px;height:26px;text-align:center;background:#0d1117;border:1px solid #30363d;
+  border-radius:4px;color:#c9d1d9;font-size:13px;font-weight:700;
+}
+.ep-wiz-apt-hint { font-size:10px; color:#8b949e; }
+.ep-wiz-derive {
+  display:flex; gap:20px; flex-wrap:wrap; margin-top:12px;
+  padding:8px 12px; background:#161b22; border-radius:6px; font-size:11px; color:#8b949e;
+}
+.ep-wiz-derive b { color:#58a6ff; }
+
+/* PP bar */
+.ep-wiz-pp-bar {
+  display:flex; gap:16px; padding:8px 12px; background:#161b22;
+  border-radius:6px; margin-bottom:12px; font-size:12px; align-items:center;
+}
+.ep-pp-left { color:#58a6ff; font-size:15px; font-weight:700; }
+
+/* Skills table */
+.ep-wiz-sk-table { display:grid; gap:4px; }
+.ep-wiz-sk-row {
+  display:grid; grid-template-columns:1fr auto;
+  align-items:center; gap:8px; padding:4px 8px;
+  border-radius:4px; background:#161b22;
+}
+.ep-wiz-sk-row:hover { background:#21262d; }
+.ep-wiz-sk-name { display:flex; align-items:center; gap:6px; }
+.ep-wiz-sk-name > span { font-size:12px; color:#c9d1d9; }
+.ep-sk-nom-inp {
+  background:#0d1117; border:1px solid #30363d; border-radius:4px;
+  color:#c9d1d9; font-size:11px; padding:2px 6px; height:22px; width:150px;
+}
+.ep-wiz-sk-apt { background:#21262d; color:#58a6ff; padding:1px 5px; border-radius:3px; font-size:10px; }
+.ep-wiz-sk-score { display:flex; align-items:center; gap:4px; font-size:12px; }
+.ep-sk-base-val { color:#8b949e; min-width:20px; text-align:right; }
+.ep-sk-plus, .ep-sk-sep { color:#30363d; }
+.ep-sk-btn {
+  width:22px;height:22px;border-radius:3px;background:#21262d;border:1px solid #30363d;
+  color:#c9d1d9;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;
+}
+.ep-sk-btn:hover { background:#58a6ff; color:#0d1117; }
+.ep-sk-pp-inp {
+  width:40px;height:22px;text-align:center;background:#0d1117;border:1px solid #30363d;
+  border-radius:3px;color:#c9d1d9;font-size:12px;
+}
+.ep-sk-total { font-weight:700; color:#3fb950; min-width:28px; text-align:right; }
+.ep-sk-bonus { color:#f0883e; font-size:10px; }
+
+/* Sections divers */
+.ep-wiz-section { margin-bottom:16px; }
+.ep-wiz-section h3 { font-size:13px; color:#c9d1d9; margin:0 0 8px; border-bottom:1px solid #21262d; padding-bottom:4px; }
+.ep-wiz-inline { display:flex; align-items:center; gap:10px; }
+.ep-wiz-cost { font-size:11px; color:#8b949e; }
+.ep-wiz-cost b { color:#58a6ff; }
+.ep-aud-inp,.ep-cred-inp {
+  width:60px;height:30px;text-align:center;background:#0d1117;border:1px solid #30363d;
+  border-radius:4px;color:#c9d1d9;font-size:14px;font-weight:700;
+}
+.ep-rep-inp { width:55px;height:26px;text-align:center;background:#0d1117;border:1px solid #30363d;border-radius:4px;color:#c9d1d9;font-size:12px; }
+.ep-wiz-rep-row { display:flex; align-items:center; justify-content:space-between; padding:3px 0; }
+.ep-rep-nom { font-size:12px; color:#8b949e; }
+.ep-wiz-rep-total { font-size:11px; color:#8b949e; margin-top:6px; text-align:right; }
+.ep-morphe-sel { width:100%;background:#0d1117 !important;border:1px solid #30363d;border-radius:4px;color:#c9d1d9 !important;padding:4px 8px;font-size:12px;margin-bottom:6px; }
+.ep-morphe-sel option { background:#0d1117 !important; color:#c9d1d9 !important; }
+
+/* PP banner */
+.ep-wiz-pp-banner { padding:10px 16px; background:#0d2137; border-radius:6px; font-size:14px; text-align:center; margin-bottom:16px; }
+.ep-wiz-pp-banner b { font-size:20px; color:#58a6ff; }
+
+/* Recap */
+.ep-wiz-recap { width:100%; border-collapse:collapse; font-size:12px; }
+.ep-wiz-recap td { padding:5px 8px; border-bottom:1px solid #21262d; }
+.ep-wiz-recap td:first-child { color:#8b949e; width:40%; }
+.ep-neg { color:#f85149; }
+.ep-warn { color:#f0883e; font-size:11px; }
+
+/* Inputs texte */
+.ep-wiz-field { margin-bottom:12px; }
+.ep-wiz-field label { display:block; font-size:11px; color:#8b949e; margin-bottom:4px; }
+.ep-wiz-field input[type=text] { width:100%;background:#0d1117;border:1px solid #30363d;border-radius:4px;color:#c9d1d9;padding:6px 10px;font-size:13px; }
+.ep-wiz-section input[type=text] { width:100%;background:#0d1117;border:1px solid #30363d;border-radius:4px;color:#c9d1d9;padding:5px 10px;font-size:12px;margin-bottom:6px;display:block; }
+
+/* Footer */
+.ep-wiz-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 20px; background:#161b22; border-top:1px solid #21262d; flex-shrink:0;
+}
+.ep-wiz-pp-display { font-size:12px; color:#8b949e; }
+.ep-wiz-pp-display b { color:#58a6ff; font-size:15px; }
+.ep-wiz-btn {
+  padding:7px 18px; border-radius:6px; border:1px solid #30363d; background:#21262d;
+  color:#c9d1d9; cursor:pointer; font-size:12px; transition:all .15s;
+}
+.ep-wiz-btn:hover:not([disabled]) { background:#30363d; }
+.ep-wiz-btn[disabled] { opacity:0.4; cursor:default; }
+.ep-btn-primary { background:#238636; border-color:#2ea043; color:#fff; font-weight:700; }
+.ep-btn-primary:hover { background:#2ea043; }
+
+/* Bouton sidebar */
+.ep-creator-btn {
+  width: 100%;
+  margin-bottom: 4px;
+  background: linear-gradient(135deg, #1a5fa0, #0d2137);
+  border: 1px solid #58a6ff;
+  color: #58a6ff;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.ep-creator-btn:hover {
+  background: #58a6ff;
+  color: #0d1117;
+}
+
+.ep-sk-over60 { color: #f0883e !important; } /* Total > 60 = coût x2 */
+.ep-sk-cost { font-size: 10px; color: #6e7681; margin-left: 4px; }
+
+/* ── Aspects ─────────────────────────────────────────────────── */
+.ep-wiz-aspects-layout { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.ep-wiz-asp-title { font-size:12px; font-weight:700; color:#c9d1d9; margin:0 0 8px; padding-bottom:4px; border-bottom:1px solid #21262d; }
+.ep-asp-pos-title { color:#3fb950; }
+.ep-asp-neg-title { color:#f0883e; }
+.ep-wiz-asp-list { max-height:260px; overflow-y:auto; display:grid; gap:3px; }
+.ep-wiz-asp-row { display:grid; grid-template-columns:1fr auto; gap:4px; align-items:start; padding:4px 6px; border-radius:4px; background:#161b22; }
+.ep-wiz-asp-row:hover { background:#21262d; }
+.ep-wiz-asp-lbl { display:flex; flex-direction:column; gap:2px; cursor:default; }
+.ep-asp-nom { font-size:11px; color:#c9d1d9; font-weight:600; }
+.ep-asp-cout { font-size:10px; font-weight:700; }
+.ep-asp-cout-pos { color:#f85149; }
+.ep-asp-cout-neg { color:#3fb950; }
+.ep-asp-desc { font-size:10px; color:#8b949e; grid-column:1/-1; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.ep-asp-add-btn { width:24px; height:24px; border-radius:4px; font-size:14px; cursor:pointer; border:1px solid #30363d; display:flex; align-items:center; justify-content:center; }
+.ep-asp-add-pos { background:#0d2137; color:#58a6ff; }
+.ep-asp-add-pos:hover { background:#58a6ff; color:#0d1117; }
+.ep-asp-add-neg { background:#1a1a0d; color:#f0883e; }
+.ep-asp-add-neg:hover { background:#f0883e; color:#0d1117; }
+.ep-wiz-asp-chosen { margin-top:16px; padding:10px; background:#161b22; border-radius:6px; }
+.ep-wiz-asp-chosen-row { display:flex; align-items:center; justify-content:space-between; padding:4px 0; border-bottom:1px solid #21262d; gap:8px; }
+.ep-asp-neg-row .ep-asp-nom { color:#f0883e; }
+.ep-asp-remove-btn { background:none; border:none; color:#f85149; cursor:pointer; font-size:12px; padding:2px 4px; }
+
+/* ── Bonus libres ──────────────────────────────────────────────── */
+.ep-wiz-bonus-libres {
+  margin-top: 12px; padding: 10px 14px;
+  background: #1a2030; border: 1px solid #f0883e;
+  border-radius: 6px;
+}
+.ep-wiz-bonus-libre-title {
+  font-size: 12px; color: #f0883e; font-weight: 700;
+  margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px solid #f0883e44;
+}
+.ep-wiz-bonus-libre-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 0; flex-wrap: wrap;
+}
+.ep-bl-label { font-size: 12px; color: #c9d1d9; min-width: 200px; }
+.ep-bl-label b { color: #f0883e; }
+.ep-bonus-libre-sel {
+  background: #0d1117 !important; border: 1px solid #30363d; border-radius: 4px;
+  color: #c9d1d9 !important; padding: 4px 8px; font-size: 11px; flex: 1; min-width: 200px;
+}
+.ep-bonus-libre-sel option {
+  background: #0d1117 !important;
+  color: #c9d1d9 !important;
+}
+.ep-bl-chosen { font-size: 11px; color: #3fb950; }
+
+/* Force fond sombre sur tous les selects du wizard */
+.ep-wizard select {
+  background: #0d1117 !important;
+  color: #c9d1d9 !important;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+}
+.ep-wizard select option {
+  background: #0d1117 !important;
+  color: #c9d1d9 !important;
+}
+.ep-wizard select:focus {
+  outline: 1px solid #58a6ff;
+}
+
+/* Wrap bonus libre select + input custom */
+.ep-bl-select-wrap { display:flex; flex-direction:column; gap:4px; flex:1; }
+.ep-bl-custom-inp {
+  background:#0d1117 !important; border:1px solid #f0883e; border-radius:4px;
+  color:#c9d1d9 !important; padding:4px 8px; font-size:11px;
+}
+
+/* Réputation */
+.ep-rep-rules { display:flex; flex-direction:column; gap:3px; margin-bottom:8px; font-size:11px; color:#8b949e; }
+.ep-rep-gratuits-bar { padding:6px 10px; background:#1a2030; border-radius:4px; margin-bottom:8px; font-size:12px; }
+.ep-ok   { color:#3fb950; }
+.ep-over { color:#f85149; }
+.ep-rep-reste { color:#8b949e; font-size:11px; }
+.ep-rep-hint  { font-size:10px; color:#6e7681; }

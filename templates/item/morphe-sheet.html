@@ -1,0 +1,199 @@
+{{!-- Eclipse Phase — Fiche Morphe (tous types du Morph Recognition Guide) --}}
+<form class="{{cssClass}} ep-sheet ep-item-sheet" autocomplete="off">
+  <header class="ep-item-header" style="align-items:flex-start;gap:10px">
+    {{!-- Grande image du morphe (portrait) — devient l'avatar du perso quand le morphe est appliqué --}}
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0">
+      <img class="item-img" src="{{item.img}}" data-edit="img" title="Image du morphe (cliquer pour changer)"
+           style="width:140px;height:140px;object-fit:cover;border:1px solid var(--ep-border);border-radius:6px;cursor:pointer" />
+      <span style="font-size:9px;color:var(--ep-text2);text-transform:uppercase;letter-spacing:1px">Image du morphe</span>
+    </div>
+    {{!-- Vignette d'échelle : proportion du morphe par rapport à un humain standard --}}
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0">
+      <img src="{{imageEchelle}}" data-edit="system.image_echelle" title="Proportion par rapport à un humain standard (cliquer pour changer)"
+           style="width:48px;height:48px;object-fit:contain;border:1px dashed var(--ep-border);border-radius:4px;cursor:pointer;background:var(--ep-bg-panel)" />
+      <span style="font-size:9px;color:var(--ep-text2);text-transform:uppercase;letter-spacing:1px;text-align:center">Échelle<br>vs humain</span>
+    </div>
+    <div style="flex:1">
+      <input class="item-name" type="text" name="name" value="{{item.name}}" placeholder="Nom du morphe" />
+      <select name="system.type_morphe" style="margin-top:4px;width:100%">
+        <optgroup label="— BIOMORPHES —">
+          <option value="plat"          {{#if (eq system.type_morphe "plat")}}selected{{/if}}>Plat (Flat)</option>
+          <option value="episseur"      {{#if (eq system.type_morphe "episseur")}}selected{{/if}}>Épisseur (Splicer)</option>
+          <option value="exalte"        {{#if (eq system.type_morphe "exalte")}}selected{{/if}}>Exalté (Exalt)</option>
+          <option value="olympien"      {{#if (eq system.type_morphe "olympien")}}selected{{/if}}>Olympien</option>
+          <option value="fantome"       {{#if (eq system.type_morphe "fantome")}}selected{{/if}}>Fantôme (Ghost)</option>
+          <option value="furie"         {{#if (eq system.type_morphe "furie")}}selected{{/if}}>Furie (Fury)</option>
+          <option value="menton"        {{#if (eq system.type_morphe "menton")}}selected{{/if}}>Menton</option>
+          <option value="neotenic"      {{#if (eq system.type_morphe "neotenic")}}selected{{/if}}>Néoténique</option>
+          <option value="futura"        {{#if (eq system.type_morphe "futura")}}selected{{/if}}>Futura</option>
+          <option value="remade"        {{#if (eq system.type_morphe "remade")}}selected{{/if}}>Remadelé (Remade)</option>
+          <option value="hibernoide"    {{#if (eq system.type_morphe "hibernoide")}}selected{{/if}}>Hibernoïde</option>
+          <option value="bouncer"       {{#if (eq system.type_morphe "bouncer")}}selected{{/if}}>Bondisseur (Bouncer)</option>
+          <option value="bruiser"       {{#if (eq system.type_morphe "bruiser")}}selected{{/if}}>Bruiser</option>
+          <option value="rodeur"        {{#if (eq system.type_morphe "rodeur")}}selected{{/if}}>Rôdeur (Ruster)</option>
+          <option value="hazer"         {{#if (eq system.type_morphe "hazer")}}selected{{/if}}>Hazer</option>
+          <option value="aquanaut"      {{#if (eq system.type_morphe "aquanaut")}}selected{{/if}}>Aquanaute</option>
+          <option value="sylphe"        {{#if (eq system.type_morphe "sylphe")}}selected{{/if}}>Sylphe</option>
+          <option value="neo_avien"     {{#if (eq system.type_morphe "neo_avien")}}selected{{/if}}>Néo-Avien</option>
+          <option value="neo_hominide"  {{#if (eq system.type_morphe "neo_hominide")}}selected{{/if}}>Néo-Hominidé</option>
+          <option value="octomorphe"    {{#if (eq system.type_morphe "octomorphe")}}selected{{/if}}>Octomorphe</option>
+          <option value="novacrabbe"    {{#if (eq system.type_morphe "novacrabbe")}}selected{{/if}}>Novacrabbe</option>
+          <option value="crasher"       {{#if (eq system.type_morphe "crasher")}}selected{{/if}}>Crasher</option>
+          <option value="dvergr"        {{#if (eq system.type_morphe "dvergr")}}selected{{/if}}>Dvergr</option>
+          <option value="galatea"       {{#if (eq system.type_morphe "galatea")}}selected{{/if}}>Galatée</option>
+          <option value="alpiniste"     {{#if (eq system.type_morphe "alpiniste")}}selected{{/if}}>Alpiniste Martien</option>
+        </optgroup>
+        <optgroup label="— PODS / COSSES —">
+          <option value="cosse_plaisir"     {{#if (eq system.type_morphe "cosse_plaisir")}}selected{{/if}}>Cosse de Plaisir</option>
+          <option value="cosse_ouvriere"    {{#if (eq system.type_morphe "cosse_ouvriere")}}selected{{/if}}>Cosse Ouvrière</option>
+          <option value="cosse_securite"    {{#if (eq system.type_morphe "cosse_securite")}}selected{{/if}}>Cosse de Sécurité</option>
+          <option value="cosse_specialiste" {{#if (eq system.type_morphe "cosse_specialiste")}}selected{{/if}}>Cosse Spécialiste</option>
+          <option value="cosse_sous_vide"   {{#if (eq system.type_morphe "cosse_sous_vide")}}selected{{/if}}>Cosse Sous-vide</option>
+          <option value="basic_pod"         {{#if (eq system.type_morphe "basic_pod")}}selected{{/if}}>Cosse Basique</option>
+          <option value="ripwing"           {{#if (eq system.type_morphe "ripwing")}}selected{{/if}}>Ripwing</option>
+          <option value="ayah"              {{#if (eq system.type_morphe "ayah")}}selected{{/if}}>Ayah</option>
+        </optgroup>
+        <optgroup label="— SYNTHOMORPHES —">
+          <option value="chassis"      {{#if (eq system.type_morphe "chassis")}}selected{{/if}}>Châssis (Case)</option>
+          <option value="synth"        {{#if (eq system.type_morphe "synth")}}selected{{/if}}>Synthé (Synth)</option>
+          <option value="arachnoide"   {{#if (eq system.type_morphe "arachnoide")}}selected{{/if}}>Arachnoïde</option>
+          <option value="libellule"    {{#if (eq system.type_morphe "libellule")}}selected{{/if}}>Libellule (Dragonfly)</option>
+          <option value="flexbot"      {{#if (eq system.type_morphe "flexbot")}}selected{{/if}}>Flexbot</option>
+          <option value="faucheur"     {{#if (eq system.type_morphe "faucheur")}}selected{{/if}}>Faucheur (Reaper)</option>
+          <option value="slitheroid"   {{#if (eq system.type_morphe "slitheroid")}}selected{{/if}}>Slitheroid</option>
+          <option value="gargoyle"     {{#if (eq system.type_morphe "gargoyle")}}selected{{/if}}>Gargoyle</option>
+          <option value="swarmanoid"   {{#if (eq system.type_morphe "swarmanoid")}}selected{{/if}}>Swarmanoid / Nuéenoïde</option>
+          <option value="savant"       {{#if (eq system.type_morphe "savant")}}selected{{/if}}>Savant</option>
+          <option value="fenrir"       {{#if (eq system.type_morphe "fenrir")}}selected{{/if}}>Fenrir</option>
+          <option value="synthomorphe" {{#if (eq system.type_morphe "synthomorphe")}}selected{{/if}}>Synthomorphe générique</option>
+        </optgroup>
+        <optgroup label="— INFOMORPHES —">
+          <option value="infomorphe"   {{#if (eq system.type_morphe "infomorphe")}}selected{{/if}}>Infomorphe</option>
+          <option value="muse"         {{#if (eq system.type_morphe "muse")}}selected{{/if}}>Muse</option>
+        </optgroup>
+      </select>
+    </div>
+  </header>
+
+  {{!-- Stats principales --}}
+  <div style="padding:8px 10px;display:flex;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--ep-border)">
+    <div class="ep-form-group" style="min-width:110px">
+      <label>Endurance</label>
+      <input type="number" name="system.endurance" value="{{system.endurance}}" min="0" style="width:70px" />
+    </div>
+    <div class="ep-form-group" style="min-width:110px">
+      <label>Seuil de Blessure</label>
+      <input type="number" name="system.seuil_blessure" value="{{system.seuil_blessure}}" min="0" style="width:70px" />
+    </div>
+    <div class="ep-form-group" style="min-width:110px">
+      <label>Max Aptitude</label>
+      <input type="number" name="system.max_aptitude" value="{{system.max_aptitude}}" min="0" max="40" style="width:70px" />
+    </div>
+    <div class="ep-form-group" style="min-width:110px">
+      <label>Modif. Rapidité</label>
+      <input type="number" name="system.modif_rapidite" value="{{system.modif_rapidite}}" style="width:70px" />
+    </div>
+    <div class="ep-form-group" style="min-width:80px">
+      <label>Coût PP</label>
+      <input type="number" name="system.cout_pp" value="{{system.cout_pp}}" min="0" style="width:70px" />
+    </div>
+  </div>
+
+  {{!-- Bonus d'Aptitudes — 7 champs explicites (pas de helper "array") --}}
+  <div style="padding:8px 10px;border-bottom:1px solid var(--ep-border)">
+    <label style="display:block;margin-bottom:6px;font-size:10px;text-transform:uppercase;color:var(--ep-accent2);letter-spacing:1px">
+      Bonus d'Aptitudes du Morphe (colonne "Bonus de Morphe" sur la fiche)
+    </label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+        <label style="font-size:10px;font-weight:bold;color:var(--ep-accent2)">COG</label>
+        <input type="number" name="system.aptitudes_bonus.cog" value="{{system.aptitudes_bonus.cog}}" style="width:48px;text-align:center;font-size:14px" />
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+        <label style="font-size:10px;font-weight:bold;color:var(--ep-accent2)">COO</label>
+        <input type="number" name="system.aptitudes_bonus.coo" value="{{system.aptitudes_bonus.coo}}" style="width:48px;text-align:center;font-size:14px" />
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+        <label style="font-size:10px;font-weight:bold;color:var(--ep-accent2)">INT</label>
+        <input type="number" name="system.aptitudes_bonus.int" value="{{system.aptitudes_bonus.int}}" style="width:48px;text-align:center;font-size:14px" />
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+        <label style="font-size:10px;font-weight:bold;color:var(--ep-accent2)">RÉF</label>
+        <input type="number" name="system.aptitudes_bonus.ref" value="{{system.aptitudes_bonus.ref}}" style="width:48px;text-align:center;font-size:14px" />
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+        <label style="font-size:10px;font-weight:bold;color:var(--ep-accent2)">AST</label>
+        <input type="number" name="system.aptitudes_bonus.ast" value="{{system.aptitudes_bonus.ast}}" style="width:48px;text-align:center;font-size:14px" />
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+        <label style="font-size:10px;font-weight:bold;color:var(--ep-accent2)">SOM</label>
+        <input type="number" name="system.aptitudes_bonus.som" value="{{system.aptitudes_bonus.som}}" style="width:48px;text-align:center;font-size:14px" />
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px">
+        <label style="font-size:10px;font-weight:bold;color:var(--ep-accent2)">VOL</label>
+        <input type="number" name="system.aptitudes_bonus.vol" value="{{system.aptitudes_bonus.vol}}" style="width:48px;text-align:center;font-size:14px" />
+      </div>
+    </div>
+    <p style="font-size:10px;color:var(--ep-text3);margin-top:4px">
+      Ces valeurs s'affichent dans la ligne "Bonus de Morphe" de la table des aptitudes sur la fiche PJ.
+    </p>
+  </div>
+
+  {{!-- Champs MRG complets --}}
+  <div style="padding:8px 10px;display:flex;flex-direction:column;gap:8px">
+
+    {{!-- Mobilité (MRG: Movement Rate / Mobility System) --}}
+    <div class="ep-form-group">
+      <label>Mobilité / Taux de mouvement</label>
+      <input type="text" name="system.mobilite" value="{{system.mobilite}}"
+             placeholder="ex: 4/20, Natation 2/10 · Marcheur 4/24, Vecteur de poussée 8/40…" />
+    </div>
+
+    {{!-- Armure + Coût crédits --}}
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <div class="ep-form-group" style="flex:1;min-width:160px">
+        <label>Armure intrinsèque (Én./Cin.)</label>
+        <input type="text" name="system.armure" value="{{system.armure}}"
+               placeholder="ex: 8/8 · Biotissée légère 2/3…" />
+      </div>
+      <div class="ep-form-group" style="flex:1;min-width:200px">
+        <label>Coût en crédits (Credit Cost)</label>
+        <input type="text" name="system.cout_credits" value="{{system.cout_credits}}"
+               placeholder="ex: Expensive (minimum 40,000+)" />
+      </div>
+    </div>
+
+    {{!-- Implants (MRG: Implants / Enhancements) --}}
+    <div class="ep-form-group">
+      <label>Implants / Améliorations de série</label>
+      <textarea name="system.implants" rows="3" placeholder="ex: Bio-modes standards, Implants réseau de base, Pile corticale…">{{system.implants}}</textarea>
+    </div>
+
+    {{!-- Avantages (MRG: Advantages) --}}
+    <div class="ep-form-group">
+      <label>Avantages (Advantages)</label>
+      <textarea name="system.avantages" rows="2" placeholder="ex: +5 COO, +10 SOM, Armure 8/8, Limber (niv.1)…">{{system.avantages}}</textarea>
+    </div>
+
+    {{!-- Désavantages (MRG: Disadvantages) --}}
+    <div class="ep-form-group">
+      <label>Désavantages (Disadvantages)</label>
+      <input type="text" name="system.desavantages" value="{{system.desavantages}}"
+             placeholder="ex: Stigmatisation sociale (Cosse), Vallée dérangeante…" />
+    </div>
+
+    {{!-- Notes (MRG: Notes — traits spéciaux) --}}
+    <div class="ep-form-group">
+      <label>Notes (traits spéciaux)</label>
+      <input type="text" name="system.notes" value="{{system.notes}}"
+             placeholder="ex: Trait Biochimie Non-Humaine, Très Grande Taille, Non-Mammifère…" />
+    </div>
+
+    {{!-- Description libre --}}
+    <div class="ep-form-group">
+      <label>Description</label>
+      <textarea name="system.description" rows="3" placeholder="Description physique et caractéristiques du morphe…">{{system.description}}</textarea>
+    </div>
+
+  </div>
+</form>

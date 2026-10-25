@@ -1,0 +1,163 @@
+{
+  "id": "eclipse-phase",
+  "title": "Eclipse Phase",
+  "description": "Système Eclipse Phase v1 — Édition française. Jeu de rôle de transhumanisme, d'horreur et de conspiration.",
+  "version": "1.1.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Posthuman Studios / Black Book Editions",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "eclipsephase.js"
+  ],
+  "styles": [
+    "styles/eclipsephase.css",
+    "styles/character-creator.css"
+  ],
+  "languages": [
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {}
+    },
+    "Item": {
+      "morphe": {},
+      "equipement": {},
+      "aspect": {},
+      "passe_psi": {},
+      "arme_melee": {},
+      "arme_distance": {},
+      "armure_item": {},
+      "competence": {}
+    }
+  },
+  "template": "template.json",
+  "initiative": "1d10 + @stats.init.effective",
+  "gridDistance": 1,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "stats.dommages",
+  "secondaryTokenAttribute": "stats.stress",
+  "url": "https://github.com/cedrictorres0427-ops/fvtt-system-eclipse-phase",
+  "manifest": "https://github.com/cedrictorres0427-ops/fvtt-system-eclipse-phase/releases/latest/download/system.json",
+  "flags": {},
+  "packs": [
+    {
+      "name": "morphes",
+      "label": "Morphes",
+      "path": "packs/morphes",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "armes_melee",
+      "label": "Armes de Mêlée",
+      "path": "packs/armes_melee",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "armes_distance",
+      "label": "Armes à Distance",
+      "path": "packs/armes_distance",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "armures",
+      "label": "Armures",
+      "path": "packs/armures",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "aspects",
+      "label": "Aspects",
+      "path": "packs/aspects",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "passes_psi",
+      "label": "Passes Psi",
+      "path": "packs/passes_psi",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "vehicules",
+      "label": "Véhicules & Robots",
+      "path": "packs/vehicules",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "equipements",
+      "label": "Équipement",
+      "path": "packs/equipements",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "competences",
+      "label": "Compétences",
+      "path": "packs/competences",
+      "type": "Item",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "pretires",
+      "label": "Prétirés — Kit d'Introduction",
+      "path": "packs/pretires",
+      "type": "Actor",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "pnj_kit",
+      "label": "PNJ — Prenez garde aux ADM",
+      "path": "packs/pnj_kit",
+      "type": "Actor",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "pnj_portes",
+      "label": "PNJ — Les Portes de l'Extinction",
+      "path": "packs/pnj_portes",
+      "type": "Actor",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "campagne_portes",
+      "label": "Campagne — Les Portes de l'Extinction",
+      "path": "packs/campagne_portes",
+      "type": "JournalEntry",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "regles",
+      "label": "Règles — Livre de base",
+      "path": "packs/regles",
+      "type": "JournalEntry",
+      "system": "eclipse-phase"
+    },
+    {
+      "name": "tables",
+      "label": "Tables du livre de base",
+      "path": "packs/tables",
+      "type": "RollTable",
+      "system": "eclipse-phase"
+    }
+  ],
+  "download": "https://github.com/cedrictorres0427-ops/fvtt-system-eclipse-phase/releases/download/v1.1.0/eclipse-phase.zip"
+}

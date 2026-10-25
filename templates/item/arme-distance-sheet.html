@@ -1,0 +1,84 @@
+{{!-- Eclipse Phase — Fiche Arme à Distance --}}
+<form class="{{cssClass}} ep-sheet ep-item-sheet" autocomplete="off">
+  <header class="ep-item-header">
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div>
+      <input class="item-name" type="text" name="name" value="{{item.name}}" placeholder="Nom de l'arme" />
+      <div style="font-size:11px;color:var(--ep-text2);margin-top:2px">Arme à distance</div>
+    </div>
+  </header>
+  <div style="padding:10px;display:flex;flex-wrap:wrap;gap:10px">
+    <div class="ep-form-group" style="min-width:140px">
+      <label>Compétence</label>
+      <select name="system.competence" style="width:100%">
+        <option value="armes_cinetiques"    {{#if (eq system.competence "armes_cinetiques")}}selected{{/if}}>Armes cinétiques</option>
+        <option value="armes_rayon"         {{#if (eq system.competence "armes_rayon")}}selected{{/if}}>Armes à rayon</option>
+        <option value="armes_dispersion"    {{#if (eq system.competence "armes_dispersion")}}selected{{/if}}>Armes à dispersion</option>
+        <option value="armes_guidage"       {{#if (eq system.competence "armes_guidage")}}selected{{/if}}>Armes à guidage</option>
+        <option value="armes_jet"           {{#if (eq system.competence "armes_jet")}}selected{{/if}}>Armes de jet</option>
+        <option value="armes_montees"       {{#if (eq system.competence "armes_montees")}}selected{{/if}}>Armes montées</option>
+        <option value="armes_distance_exot" {{#if (eq system.competence "armes_distance_exot")}}selected{{/if}}>Armes dist. exot.</option>
+      </select>
+    </div>
+    <div class="ep-form-group" style="min-width:70px">
+      <label>PA</label>
+      <input type="number" name="system.pa" value="{{system.pa}}" style="width:60px" />
+    </div>
+    <div class="ep-form-group" style="min-width:110px">
+      <label>VD</label>
+      <input type="text" name="system.vd" value="{{system.vd}}" placeholder="ex: 2d10+6" style="width:100px" />
+    </div>
+    <div class="ep-form-group" style="min-width:110px">
+      <label>VD Moyenne</label>
+      <input type="text" name="system.vd_moyenne" value="{{system.vd_moyenne}}" placeholder="ex: 17" style="width:100px" />
+    </div>
+    <div class="ep-form-group" style="min-width:120px">
+      <label>Modes de tir</label>
+      <input type="text" name="system.modes" value="{{system.modes}}" placeholder="SA, TR, FA" style="width:110px" />
+    </div>
+    <div class="ep-form-group" style="min-width:80px">
+      <label>Munitions</label>
+      <input type="number" name="system.munitions" value="{{system.munitions}}" min="0" style="width:60px" />
+      <span style="font-size:11px;color:var(--ep-text2)">/</span>
+      <input type="number" name="system.munitions_max" value="{{system.munitions_max}}" min="1" style="width:60px" />
+    </div>
+  </div>
+  <div style="padding:0 10px">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+      <div class="ep-form-group" style="min-width:70px"><label>Type munition</label><input type="text" name="system.type_munition" value="{{system.type_munition}}" style="width:100px" /></div>
+      <div class="ep-form-group" style="min-width:70px"><label>Portée courte</label><input type="number" name="system.portee_courte"  value="{{system.portee_courte}}"  min="0" style="width:60px" /></div>
+      <div class="ep-form-group" style="min-width:70px"><label>Portée moyenne</label><input type="number" name="system.portee_moyenne" value="{{system.portee_moyenne}}" min="0" style="width:60px" /></div>
+      <div class="ep-form-group" style="min-width:70px"><label>Portée longue</label><input type="number" name="system.portee_longue"  value="{{system.portee_longue}}"  min="0" style="width:60px" /></div>
+      <div class="ep-form-group" style="min-width:70px"><label>Portée extrême</label><input type="number" name="system.portee_extreme" value="{{system.portee_extreme}}" min="0" style="width:60px" /></div>
+    </div>
+    <div class="ep-form-group"><label>Notes / Effets spéciaux</label><textarea name="system.notes" rows="3" placeholder="Effets spéciaux…">{{system.notes}}</textarea></div>
+    <div class="ep-form-group ep-cout-bloc" style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+      <div style="flex:1;min-width:190px">
+        <label>Catégorie de prix</label>
+        <select name="system.cout" style="width:100%">
+          <option value=""           {{#if (eq system.cout "")}}selected{{/if}}>— non défini —</option>
+          <option value="gratuit"    {{#if (eq system.cout "gratuit")}}selected{{/if}}>Gratuit</option>
+          <option value="modique"    {{#if (eq system.cout "modique")}}selected{{/if}}>Modique — 1 à 99 cr. (moy. 50)</option>
+          <option value="bas"        {{#if (eq system.cout "bas")}}selected{{/if}}>Bas — 100 à 499 cr. (moy. 250)</option>
+          <option value="moyen"      {{#if (eq system.cout "moyen")}}selected{{/if}}>Moyen — 500 à 1 499 cr. (moy. 1 000)</option>
+          <option value="eleve"      {{#if (eq system.cout "eleve")}}selected{{/if}}>Élevé — 1 500 à 9 999 cr. (moy. 5 000)</option>
+          <option value="onereux"    {{#if (eq system.cout "onereux")}}selected{{/if}}>Onéreux — 10 000 cr. et + (moy. 20 000)</option>
+        </select>
+      </div>
+      <div style="width:150px">
+        <label>Prix exact (crédits)</label>
+        <input type="text" name="system.cout_credits" value="{{system.cout_credits}}"
+               placeholder="{{coutMoyen}}" title="Laisser vide pour utiliser le prix moyen de la catégorie" style="width:100%" />
+      </div>
+      <div style="flex:1;min-width:170px">
+        <label>Précisions de prix</label>
+        <input type="text" name="system.cout_notes" value="{{system.cout_notes}}"
+               placeholder="ex : minimum 40 000, +1 catégorie…" style="width:100%" />
+      </div>
+    </div>
+    <p class="ep-cout-resume" style="margin:2px 0 8px;font-size:11px;color:var(--ep-accent2)">
+      💰 Prix retenu : <b>{{coutAffiche}}</b>
+    </p>
+    <div class="ep-form-group"><label>Description</label><textarea name="system.description" rows="2" placeholder="Description…">{{system.description}}</textarea></div>
+  </div>
+</form>

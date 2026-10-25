@@ -1,0 +1,81 @@
+{{!-- Eclipse Phase — Fiche Équipement divers --}}
+<form class="{{cssClass}} ep-sheet ep-item-sheet" autocomplete="off">
+  <header class="ep-item-header">
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div style="flex:1">
+      <input class="item-name" type="text" name="name" value="{{item.name}}" placeholder="Nom de l'équipement" />
+      <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap">
+        <select name="system.categorie" style="min-width:130px">
+          <option value="electronique"  {{#if (eq system.categorie "electronique")}}selected{{/if}}>Électronique</option>
+          <option value="implant"       {{#if (eq system.categorie "implant")}}selected{{/if}}>Implant / Bioware</option>
+          <option value="nanogear"      {{#if (eq system.categorie "nanogear")}}selected{{/if}}>Nanotechnologie</option>
+          <option value="survie"        {{#if (eq system.categorie "survie")}}selected{{/if}}>Survie / Exploration</option>
+          <option value="drogue"        {{#if (eq system.categorie "drogue")}}selected{{/if}}>Drogue / Toxine</option>
+          <option value="communication" {{#if (eq system.categorie "communication")}}selected{{/if}}>Communication</option>
+          <option value="vehicule"      {{#if (eq system.categorie "vehicule")}}selected{{/if}}>Véhicule / Robot</option>
+          <option value="service"       {{#if (eq system.categorie "service")}}selected{{/if}}>Service</option>
+          <option value="divers"        {{#if (eq system.categorie "divers")}}selected{{/if}}>Divers</option>
+        </select>
+    <div class="ep-form-group ep-cout-bloc" style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+      <div style="flex:1;min-width:190px">
+        <label>Catégorie de prix</label>
+        <select name="system.cout" style="width:100%">
+          <option value=""           {{#if (eq system.cout "")}}selected{{/if}}>— non défini —</option>
+          <option value="gratuit"    {{#if (eq system.cout "gratuit")}}selected{{/if}}>Gratuit</option>
+          <option value="modique"    {{#if (eq system.cout "modique")}}selected{{/if}}>Modique — 1 à 99 cr. (moy. 50)</option>
+          <option value="bas"        {{#if (eq system.cout "bas")}}selected{{/if}}>Bas — 100 à 499 cr. (moy. 250)</option>
+          <option value="moyen"      {{#if (eq system.cout "moyen")}}selected{{/if}}>Moyen — 500 à 1 499 cr. (moy. 1 000)</option>
+          <option value="eleve"      {{#if (eq system.cout "eleve")}}selected{{/if}}>Élevé — 1 500 à 9 999 cr. (moy. 5 000)</option>
+          <option value="onereux"    {{#if (eq system.cout "onereux")}}selected{{/if}}>Onéreux — 10 000 cr. et + (moy. 20 000)</option>
+        </select>
+      </div>
+      <div style="width:150px">
+        <label>Prix exact (crédits)</label>
+        <input type="text" name="system.cout_credits" value="{{system.cout_credits}}"
+               placeholder="{{coutMoyen}}" title="Laisser vide pour utiliser le prix moyen de la catégorie" style="width:100%" />
+      </div>
+      <div style="flex:1;min-width:170px">
+        <label>Précisions de prix</label>
+        <input type="text" name="system.cout_notes" value="{{system.cout_notes}}"
+               placeholder="ex : minimum 40 000, +1 catégorie…" style="width:100%" />
+      </div>
+    </div>
+    <p class="ep-cout-resume" style="margin:2px 0 8px;font-size:11px;color:var(--ep-accent2)">
+      💰 Prix retenu : <b>{{coutAffiche}}</b>
+    </p>
+      </div>
+    </div>
+  </header>
+
+  <div style="padding:8px 10px">
+    {{!-- Bonus éventuel --}}
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+      <div class="ep-form-group" style="min-width:140px">
+        <label>Bonus accordé (ex: +10 à Infosec)</label>
+        <input type="text" name="system.bonus" value="{{system.bonus}}" placeholder="ex: +20 Infosec" />
+      </div>
+      <div class="ep-form-group" style="min-width:80px">
+        <label>Disponibilité</label>
+        <select name="system.disponibilite">
+          <option value="courant"     {{#if (eq system.disponibilite "courant")}}selected{{/if}}>Courant</option>
+          <option value="restreint"   {{#if (eq system.disponibilite "restreint")}}selected{{/if}}>Restreint</option>
+          <option value="illegal"     {{#if (eq system.disponibilite "illegal")}}selected{{/if}}>Illégal</option>
+          <option value="militaire"   {{#if (eq system.disponibilite "militaire")}}selected{{/if}}>Militaire</option>
+        </select>
+      </div>
+      <div class="ep-form-group" style="min-width:60px">
+        <label>Quantité</label>
+        <input type="number" name="system.quantite" value="{{system.quantite}}" min="0" style="width:60px" />
+      </div>
+    </div>
+
+    <div class="ep-form-group">
+      <label>Effets / Règles spéciales</label>
+      <textarea name="system.effets" rows="3" placeholder="Effets mécaniques, modificateurs, règles…">{{system.effets}}</textarea>
+    </div>
+    <div class="ep-form-group">
+      <label>Description</label>
+      <textarea name="system.description" rows="4" placeholder="Description de l'équipement…">{{system.description}}</textarea>
+    </div>
+  </div>
+</form>

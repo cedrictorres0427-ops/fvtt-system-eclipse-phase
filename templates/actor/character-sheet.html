@@ -1,0 +1,690 @@
+{{!-- ============================================================
+     Eclipse Phase — Fiche de Personnage
+     Conforme à la fiche officielle VF (Kryane 2013)
+     Compatible Foundry VTT v13
+     ============================================================ --}}
+<form class="{{cssClass}} ep-sheet" autocomplete="off">
+
+  {{!-- ═══════════════════════════════════════════════════════
+       EN-TÊTE : Identité + Aptitudes + Caractéristiques
+       ═══════════════════════════════════════════════════════ --}}
+  <header class="ep-header">
+
+    {{!-- Photo + Identité --}}
+    <div class="ep-header-left">
+      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+      <div class="ep-identity">
+        <div class="ep-field-row">
+          <label>PERSONNAGE</label>
+          <input class="charname" type="text" name="name" value="{{actor.name}}" placeholder="Nom du personnage" />
+        </div>
+        <div class="ep-field-row">
+          <label>Historique</label>
+          <input type="text" name="system.biographie.historique" value="{{biographie.historique}}" placeholder="—" />
+        </div>
+        <div class="ep-field-row">
+          <label>Faction</label>
+          <input type="text" name="system.biographie.faction" value="{{biographie.faction}}" placeholder="—" />
+        </div>
+        <div class="ep-field-row">
+          <label>Morphe</label>
+          <input type="text" name="system.morphe_actuel.nom" value="{{morphe_actuel.nom}}" placeholder="—" />
+        </div>
+        <div class="ep-field-row ep-field-row-sm">
+          <label>Identité sexuelle</label>
+          <input type="text" name="system.biographie.identite" value="{{biographie.identite}}" placeholder="—" style="width:110px;min-width:90px" />
+          <label>Âge</label>
+          <input type="text" name="system.biographie.age" value="{{biographie.age}}" placeholder="—" style="width:65px;min-width:55px" />
+        </div>
+        <div class="ep-field-row">
+          <label>Motivations</label>
+          <input type="text" name="system.biographie.motivations" value="{{biographie.motivations}}" placeholder="+ / −" />
+        </div>
+        <div class="ep-field-row ep-field-row-sm">
+          <label>Pts d'Audace</label>
+          <input type="number" name="system.stats.aud.value" value="{{stats.aud.value}}" min="1" max="10" style="width:40px" />
+          <div class="ep-aud-inline">
+            <button type="button" class="aud-spend ep-aud-btn" title="Dépenser 1 Audace">−</button>
+            <span class="ep-aud-pts">{{stats.aud.points}}/{{stats.aud.max}}</span>
+            <button type="button" class="aud-recover ep-aud-btn" title="Regagner 1 Audace">+</button>
+          </div>
+          <label>Pts d'XP</label>
+          <input type="number" name="system.biographie.xp" value="{{biographie.xp}}" min="0" style="width:50px" />
+        </div>
+      </div>
+    </div>
+
+    {{!-- Aptitudes + Caractéristiques --}}
+    <div class="ep-header-right">
+
+      {{!-- APTITUDES : Base / Bonus de Morphe / Bonus divers / Total --}}
+      <div class="ep-section-label">APTITUDES</div>
+      <table class="ep-apt-table">
+        <thead>
+          <tr>
+            <th class="ep-apt-lbl-col"></th>
+            <th class="ep-apt-col" title="Cognition">COG</th>
+            <th class="ep-apt-col" title="Coordination">COO</th>
+            <th class="ep-apt-col" title="Intuition">INT</th>
+            <th class="ep-apt-col" title="Réflexes">RÉF</th>
+            <th class="ep-apt-col" title="Astuce">AST</th>
+            <th class="ep-apt-col" title="Somatique">SOM</th>
+            <th class="ep-apt-col" title="Volonté">VOL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ep-apt-row">
+            <td class="ep-apt-row-lbl">Base</td>
+            {{#each aptitudes as |apt key|}}
+            <td><input type="number" name="system.aptitudes.{{key}}.base"
+                       value="{{apt.base}}" min="1" max="30" class="ep-apt-inp" /></td>
+            {{/each}}
+          </tr>
+          <tr class="ep-apt-row ep-apt-bonus-row">
+            <td class="ep-apt-row-lbl">Bonus de Morphe</td>
+            {{#each aptitudes as |apt key|}}
+            <td><input type="number" name="system.aptitudes.{{key}}.morphe"
+                       value="{{apt.morphe}}" class="ep-apt-inp ep-apt-bonus" /></td>
+            {{/each}}
+          </tr>
+          <tr class="ep-apt-row ep-apt-bonus-row">
+            <td class="ep-apt-row-lbl">Bonus divers</td>
+            {{#each aptitudes as |apt key|}}
+            <td><input type="number" name="system.aptitudes.{{key}}.divers"
+                       value="{{apt.divers}}" class="ep-apt-inp ep-apt-bonus" /></td>
+            {{/each}}
+          </tr>
+          <tr class="ep-apt-row ep-apt-total-row">
+            <td class="ep-apt-row-lbl">Total</td>
+            {{#each aptitudes as |apt key|}}
+            <td><span class="ep-apt-total apt-roll" data-apt-key="{{key}}"
+                      title="Cliquer pour lancer {{apt.abr}} ({{apt.total}})">{{apt.total}}</span></td>
+            {{/each}}
+          </tr>
+        </tbody>
+      </table>
+
+      {{!-- Formules inter-blocs --}}
+      <div class="ep-carac-formulas">
+        <span>VOL × 2</span>
+        <span class="ep-carac-formula-sep">→</span>
+        <span class="ep-formula-accent">LUC</span>
+        <span class="ep-carac-formula-sep">|</span>
+        <span>Selon le morphe</span>
+        <span class="ep-carac-formula-sep">→</span>
+        <span class="ep-formula-accent">END</span>
+      </div>
+
+      {{!-- CARACTÉRISTIQUES : ordre fiche officielle AUD ST LUC SA SB END SM INIT RAP BD --}}
+      <div class="ep-section-label">CARACTÉRISTIQUES</div>
+      <div class="ep-carac-row">
+
+        {{!-- AUD --}}
+        <div class="ep-carac-box ep-carac-ego" title="Audace (1–10)">
+          <span class="ep-carac-lbl">AUD</span>
+          <span class="ep-carac-val">{{stats.aud.points}}</span>
+        </div>
+        {{!-- ST = LUC ÷ 5 ↑ --}}
+        <div class="ep-carac-box ep-carac-ego" title="Seuil de Trauma = LUC ÷ 5 (↑)">
+          <span class="ep-carac-lbl">ST</span>
+          <span class="ep-carac-val">{{stats.st.value}}</span>
+          <span class="ep-carac-form">LUC÷5</span>
+        </div>
+        {{!-- LUC = VOL × 2 --}}
+        <div class="ep-carac-box ep-carac-ego ep-carac-primary" title="Lucidité = VOL × 2">
+          <span class="ep-carac-lbl">LUC</span>
+          <span class="ep-carac-val">{{stats.luc.value}}</span>
+          <span class="ep-carac-form">VOL×2</span>
+        </div>
+        {{!-- SA = LUC × 2 --}}
+        <div class="ep-carac-box ep-carac-ego" title="Seuil d'Aliénation = LUC × 2">
+          <span class="ep-carac-lbl">SA</span>
+          <span class="ep-carac-val">{{stats.sa.value}}</span>
+          <span class="ep-carac-form">LUC×2</span>
+        </div>
+
+        <div class="ep-carac-vsep"></div>
+
+        {{!-- SB = END ÷ 5 ↑ --}}
+        <div class="ep-carac-box ep-carac-morphe" title="Seuil de Blessure = END ÷ 5 (↑)">
+          <span class="ep-carac-lbl">SB</span>
+          <span class="ep-carac-val">{{stats.sb.value}}</span>
+          <span class="ep-carac-form">END÷5</span>
+        </div>
+        {{!-- END — définie par le morphe --}}
+        <div class="ep-carac-box ep-carac-morphe ep-carac-primary" title="Endurance — définie par le morphe">
+          <span class="ep-carac-lbl">END</span>
+          <input type="number" name="system.stats.end.value"
+                 value="{{stats.end.value}}" min="1" class="ep-carac-input" />
+          <span class="ep-carac-form">Morphe</span>
+        </div>
+        {{!-- SM = END×1,5↑ (bio) ou END×2 (synthé) --}}
+        <div class="ep-carac-box ep-carac-morphe"
+             title="Seuil de Mort = END×1,5↑ (biomorphe) ou END×2 (synthomorphe)">
+          <span class="ep-carac-lbl">SM</span>
+          <span class="ep-carac-val">{{stats.sm.value}}</span>
+          <span class="ep-carac-form-sm">Bio×1.5↑<br>Syn×2</span>
+        </div>
+
+        <div class="ep-carac-vsep"></div>
+
+        {{!-- INIT = (INT+RÉF) ÷ 5 ↑ --}}
+        <div class="ep-carac-box ep-carac-ego"
+             title="Initiative = (INT+RÉF)÷5↑ + bonus morphe | Combat : score + 1d10 | −1 par blessure/trauma">
+          <span class="ep-carac-lbl">INIT</span>
+          <span class="ep-carac-val">{{stats.init.value}}{{#if stats.malus_init.value}}<span class="ep-init-neg">−{{stats.malus_init.value}}</span>{{/if}}</span>
+          <span class="ep-carac-form">(INT+RÉF)÷5</span>
+        </div>
+        {{!-- RAP — 1 (bio) ou 3 (synthé) --}}
+        <div class="ep-carac-box ep-carac-morphe" title="Rapidité — 1 (bio) ou 3 (synthé) + implants">
+          <span class="ep-carac-lbl">RAP</span>
+          <input type="number" name="system.stats.rap.value"
+                 value="{{stats.rap.value}}" min="1" max="4" class="ep-carac-input" />
+          <span class="ep-carac-form">1/3+impl.</span>
+        </div>
+        {{!-- BD = SOM ÷ 10 ↓ --}}
+        <div class="ep-carac-box ep-carac-ego" title="Bonus de Dommages = SOM ÷ 10 (↓)">
+          <span class="ep-carac-lbl">BD</span>
+          <span class="ep-carac-val">{{stats.bd.value}}</span>
+          <span class="ep-carac-form">SOM÷10</span>
+        </div>
+
+      </div>{{!-- ep-carac-row --}}
+
+      {{!-- Formules sous les carac --}}
+      <div class="ep-carac-sub-formulas">
+        <span>LUC÷5 <span class="ep-fa">→ST</span></span>
+        <span>LUC×2 <span class="ep-fa">→SA</span></span>
+        <span>END÷5 <span class="ep-fa">→SB</span></span>
+        <span>Bio:END×1,5↑ · Syn:END×2 <span class="ep-fa">→SM</span></span>
+        <span>(INT+RÉF)÷5 <span class="ep-fa">→INIT</span></span>
+        <span>SOM÷10 <span class="ep-fa">→BD</span></span>
+      </div>
+
+      {{!-- DOMMAGES / BLESSURES + STRESS / TRAUMAS --}}
+      <div class="ep-dsbar">
+        <div class="ep-ds-phys">
+          <div class="ep-ds-labels"><span>DOMMAGES</span><span>BLESSURES</span></div>
+          <div class="ep-ds-vals">
+            <input type="number" name="system.stats.dommages.value"
+                   value="{{stats.dommages.value}}" min="0" class="ep-ds-input" />
+            <span class="ep-ds-sep">/{{stats.end.max}}</span>
+            <span class="ep-ds-badge">{{stats.blessures.value}}</span>
+            {{#if stats.blessures.value}}
+              <span class="ep-malus-tag">−{{stats.malus_actions.value}} / −{{stats.malus_init.value}}INIT</span>
+            {{/if}}
+          </div>
+          <div class="ep-ds-hints">SB {{stats.sb.value}} · SM {{stats.sm.value}}</div>
+        </div>
+        <div class="ep-ds-mental">
+          <div class="ep-ds-labels"><span>STRESS</span><span>TRAUMAS</span></div>
+          <div class="ep-ds-vals">
+            <input type="number" name="system.stats.stress.value"
+                   value="{{stats.stress.value}}" min="0" class="ep-ds-input ep-ds-input-mental" />
+            <span class="ep-ds-sep">/{{stats.luc.value}}</span>
+            <span class="ep-ds-badge ep-ds-badge-mental">{{stats.traumas.value}}</span>
+            {{#if stats.traumas.value}}
+              <span class="ep-malus-tag ep-malus-mental">−{{stats.malus_actions.value}} / −{{stats.malus_init.value}}INIT</span>
+            {{/if}}
+          </div>
+          <div class="ep-ds-hints">ST {{stats.st.value}} · SA {{stats.sa.value}}</div>
+        </div>
+        <div class="ep-ds-actions">
+          <button type="button" class="btn-dmg-apply ep-btn-small">± DMG/Stress</button>
+          <div class="ep-armor-mini">
+            <label>Armure É</label>
+            <input type="number" name="system.armure.energie"   value="{{armure.energie}}"   min="0" class="ep-armor-inp" />
+            <label>C</label>
+            <input type="number" name="system.armure.cinetique" value="{{armure.cinetique}}" min="0" class="ep-armor-inp" />
+          </div>
+        </div>
+      </div>
+
+    </div>{{!-- ep-header-right --}}
+  </header>
+
+  {{!-- ═══════════════════════════════════════════════════════
+       ONGLETS
+       ═══════════════════════════════════════════════════════ --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="competences">Compétences Actives</a>
+    <a class="item" data-tab="connaissances">Connaissances</a>
+    <a class="item" data-tab="reputation">Réputation & ID</a>
+    <a class="item" data-tab="equipement">Équipement & Morphe</a>
+    <a class="item" data-tab="biographie">Biographie</a>
+  </nav>
+
+  <div class="sheet-body">
+
+    {{!-- ─── COMPÉTENCES ACTIVES ──────────────────────────── --}}
+    <div class="tab" data-group="primary" data-tab="competences">
+      <div class="ep-skill-legend">
+        🎲 Cliquer sur TOTAL pour lancer ·
+        <kbd>Shift</kbd>+clic pour choisir une difficulté ·
+        <b>APT.</b> = aptitude hors morphe ·
+        <b>BASE</b> = PP investis ·
+        <b>H/F</b> = bonus historique/faction (permanent) ·
+        <b>Morphe</b> = bonus du morphe (badge = aptitude, champ = compétence) ·
+        • = non utilisable par défaut
+      </div>
+      <table class="ep-skills-table">
+        <thead>
+          <tr>
+            <th class="ep-th-nom">Compétence active</th>
+            <th class="ep-th-apt" title="Aptitude hors morphe (base + divers)">APT.</th>
+            <th class="ep-th-base" title="PP investis par-dessus l'aptitude">BASE</th>
+            <th class="ep-th-num" title="Bonus permanent (historique/faction)">H/F</th>
+            <th class="ep-th-num" title="Bonus du morphe : badge = aptitude, champ = compétence (conditionnel)">Morphe</th>
+            <th class="ep-th-total" title="TOTAL = APT + Morphe(apt) + BASE + H/F + Morphe(comp)">TOTAL</th>
+            <th class="ep-th-spec">Spécialisation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each competences_actives as |sk key|}}
+          <tr class="ep-skill-row {{#if sk.no_default}}ep-nd{{/if}}"
+              data-skill-key="{{key}}" data-category="actives">
+            <td class="ep-td-nom">
+              {{#if sk.no_default}}<span class="ep-nd-dot" title="Non utilisable par défaut">•</span>{{/if}}
+              {{#if sk.placeholder}}
+                <input type="text"
+                       name="system.competences_actives.{{key}}.nom"
+                       value="{{sk.nom}}"
+                       placeholder="{{sk.placeholder}}"
+                       class="ep-skill-name-inp" />
+              {{else}}
+                <span class="ep-skill-name-static" title="{{sk.tooltip}}">{{sk.nom}}</span>
+              {{/if}}
+            </td>
+            <td class="ep-td-apt">
+              <span class="ep-apt-abr">{{sk.aptAbr}}</span>
+              <span class="ep-apt-val">{{sk.apt_value}}</span>
+            </td>
+            <td class="ep-td-base">
+              <input type="number"
+                     name="system.competences_actives.{{key}}.base"
+                     value="{{sk.base}}"
+                     min="0" max="99"
+                     placeholder="0"
+                     class="ep-base-inp" />
+            </td>
+            <td class="ep-td-num">
+              <input type="number"
+                     name="system.competences_actives.{{key}}.bonus_hist"
+                     value="{{sk.bonus_hist}}"
+                     class="ep-num-inp" />
+            </td>
+            <td class="ep-td-num">
+              {{#if sk.apt_morphe}}<span class="ep-apt-morphe-badge"
+                    title="Bonus de morphe sur l'aptitude {{sk.aptAbr}} (déjà compté dans le TOTAL)">{{sk.apt_morphe_str}}</span>{{/if}}
+              <input type="number"
+                     name="system.competences_actives.{{key}}.bonus_morphe"
+                     value="{{sk.bonus_morphe}}"
+                     title="Bonus de morphe propre à cette compétence"
+                     class="ep-num-inp" />
+            </td>
+            <td class="ep-td-total">
+              <span class="skill-roll ep-skill-total"
+                    title="🎲 Lancer {{sk.displayNom}} (Shift = difficulté)">{{sk.total}}</span>
+            </td>
+            <td class="ep-td-spec">
+              <input type="text"
+                       name="system.competences_actives.{{key}}.specialisation"
+                       value="{{sk.specialisation}}"
+                       placeholder="Spécialisation (+10)" class="ep-spec-inp"
+                       style="width:100%" />
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    {{!-- ─── COMPÉTENCES DE CONNAISSANCE ─────────────────── --}}
+    <div class="tab" data-group="primary" data-tab="connaissances">
+      <div class="ep-skill-legend">
+        🎲 Cliquer sur TOTAL pour lancer ·
+        <kbd>Shift</kbd>+clic pour choisir une difficulté ·
+        Toutes utilisables par défaut
+      </div>
+      <table class="ep-skills-table">
+        <thead>
+          <tr>
+            <th class="ep-th-nom">Compétence de Connaissance</th>
+            <th class="ep-th-apt" title="Aptitude hors morphe (base + divers)">APT.</th>
+            <th class="ep-th-base">BASE</th>
+            <th class="ep-th-num" title="Bonus permanent (historique/faction)">H/F</th>
+            <th class="ep-th-num" title="Bonus du morphe : badge = aptitude, champ = compétence (conditionnel)">Morphe</th>
+            <th class="ep-th-total">TOTAL</th>
+            <th class="ep-th-spec">Spécialisation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each competences_connaissances as |sk key|}}
+          <tr class="ep-skill-row" data-skill-key="{{key}}" data-category="connaissances">
+            <td class="ep-td-nom">
+              <input type="text"
+                     name="system.competences_connaissances.{{key}}.nom"
+                     value="{{sk.nom}}"
+                     placeholder="{{sk.placeholder}}"
+                     class="ep-skill-name-inp" />
+            </td>
+            <td class="ep-td-apt">
+              <span class="ep-apt-abr">{{sk.aptAbr}}</span>
+              <span class="ep-apt-val">{{sk.apt_value}}</span>
+            </td>
+            <td class="ep-td-base">
+              <input type="number"
+                     name="system.competences_connaissances.{{key}}.base"
+                     value="{{sk.base}}"
+                     min="0" max="99"
+                     placeholder="0"
+                     class="ep-base-inp" />
+            </td>
+            <td class="ep-td-num">
+              <input type="number"
+                     name="system.competences_connaissances.{{key}}.bonus_hist"
+                     value="{{sk.bonus_hist}}"
+                     class="ep-num-inp" />
+            </td>
+            <td class="ep-td-num">
+              {{#if sk.apt_morphe}}<span class="ep-apt-morphe-badge"
+                    title="Bonus de morphe sur l'aptitude {{sk.aptAbr}} (déjà compté dans le TOTAL)">{{sk.apt_morphe_str}}</span>{{/if}}
+              <input type="number"
+                     name="system.competences_connaissances.{{key}}.bonus_morphe"
+                     value="{{sk.bonus_morphe}}"
+                     title="Bonus de morphe propre à cette compétence"
+                     class="ep-num-inp" />
+            </td>
+            <td class="ep-td-total">
+              <span class="skill-roll ep-skill-total"
+                    title="🎲 Lancer">{{sk.total}}</span>
+            </td>
+            <td class="ep-td-spec">
+              <input type="text"
+                       name="system.competences_connaissances.{{key}}.specialisation"
+                       value="{{sk.specialisation}}"
+                       placeholder="Spécialisation (+10)" class="ep-spec-inp"
+                       style="width:100%" />
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    {{!-- ─── RÉPUTATION & IDENTITÉ ────────────────────────── --}}
+    <div class="tab" data-group="primary" data-tab="reputation">
+      <div class="ep-two-col">
+        <div class="ep-col">
+          <h3 class="ep-section-title">Réputation</h3>
+          <table class="ep-rep-table">
+            <thead><tr><th>Réseau</th><th>Score (0–99)</th></tr></thead>
+            <tbody>
+              {{#each reputation as |rep key|}}
+              <tr>
+                <td>{{rep.label}}</td>
+                <td><input type="number" name="system.reputation.{{key}}.value"
+                           value="{{rep.value}}" min="0" max="99" /></td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+
+          <h3 class="ep-section-title" style="margin-top:10px">Aspects positifs & négatifs</h3>
+          <div class="ep-form-group">
+            <textarea name="system.aspects.positifs" rows="3"
+                      placeholder="Positifs…">{{aspects.positifs}}</textarea>
+          </div>
+          <div class="ep-form-group">
+            <textarea name="system.aspects.negatifs" rows="3"
+                      placeholder="Négatifs…">{{aspects.negatifs}}</textarea>
+          </div>
+          {{#each aspects_items}}
+          <div class="ep-item" data-item-id="{{this.id}}">
+            <img src="{{this.img}}" class="ep-item-img" />
+            <span class="ep-item-name">{{this.name}}</span>
+            <span class="ep-item-type">[{{this.system.type_aspect}}]</span>
+            <span class="ep-item-controls">
+              <i class="fas fa-edit item-edit"></i>
+              <i class="fas fa-trash item-delete"></i>
+            </span>
+          </div>
+          {{/each}}
+        </div>
+
+        <div class="ep-col">
+          <h3 class="ep-section-title">ID-Infos</h3>
+          <textarea name="system.biographie.notes_idinfos" rows="4"
+                    placeholder="Identités, passes…">{{biographie.notes_idinfos}}</textarea>
+          <h3 class="ep-section-title" style="margin-top:8px">Passes Psi</h3>
+          <textarea name="system.passes_psi" rows="4"
+                    placeholder="Passes disponibles…">{{passes_psi}}</textarea>
+          {{#each passes_psi_items}}
+          <div class="ep-item" data-item-id="{{this.id}}">
+            <img src="{{this.img}}" class="ep-item-img" />
+            <span class="ep-item-name">{{this.name}}</span>
+            <span class="ep-item-type">[{{this.system.type_psi}} · {{this.activation}}]</span>
+            <span class="ep-item-controls">
+              <i class="fas fa-edit item-edit"></i>
+              <i class="fas fa-trash item-delete"></i>
+            </span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    {{!-- ─── ÉQUIPEMENT & MORPHE ──────────────────────────── --}}
+    <div class="tab" data-group="primary" data-tab="equipement">
+      <div class="ep-two-col">
+        <div class="ep-col">
+          <h3 class="ep-section-title">Morphe Actuel</h3>
+          <div class="ep-morphe-card">
+            <div class="ep-form-group" style="display:flex;align-items:center;gap:10px">
+              <div style="flex:1">
+                <label>Nom <small>(modifier dans l'en-tête)</small></label>
+                <span class="ep-readonly-display">{{morphe_actuel.nom}}</span>
+              </div>
+              {{#if morphe_actuel.image_echelle}}
+              <img src="{{morphe_actuel.image_echelle}}"
+                   title="Proportion par rapport à un humain standard"
+                   style="width:48px;height:48px;object-fit:contain;border:1px solid var(--ep-border);border-radius:4px;background:var(--ep-bg-panel);flex-shrink:0" />
+              {{/if}}
+            </div>
+            <div class="ep-form-group">
+              <label>Type de morphe</label>
+              <select name="system.morphe_actuel.type">
+                <option value="biomorphe"    {{#if (eq morphe_actuel.type "biomorphe")}}selected{{/if}}>Biomorphe</option>
+                <option value="synthomorphe" {{#if (eq morphe_actuel.type "synthomorphe")}}selected{{/if}}>Synthomorphe</option>
+                <option value="infomorphe"   {{#if (eq morphe_actuel.type "infomorphe")}}selected{{/if}}>Infomorphe</option>
+                <option value="pod"          {{#if (eq morphe_actuel.type "pod")}}selected{{/if}}>Pod / Cosse</option>
+              </select>
+            </div>
+            <div class="ep-form-group">
+              <label>Endurance <small>(modifier dans l'en-tête)</small></label>
+              <span class="ep-readonly-display">{{stats.end.value}} (max {{stats.end.max}})</span>
+            </div>
+            <div class="ep-form-group" style="display:flex;gap:8px;flex-wrap:wrap">
+              <div style="flex:2;min-width:140px">
+                <label>Mobilité</label>
+                <input type="text" name="system.morphe_actuel.mobilite"
+                       value="{{morphe_actuel.mobilite}}" placeholder="ex: 4/20…" style="width:100%" />
+              </div>
+              <div style="flex:2;min-width:120px">
+                <label>Armure intrinsèque (É/C)</label>
+                <input type="text" name="system.morphe_actuel.armure"
+                       value="{{morphe_actuel.armure}}" placeholder="ex: 8/8" style="width:100%" />
+              </div>
+              <div style="flex:1;min-width:70px">
+                <label>Bonus INIT</label>
+                <input type="number" name="system.morphe_actuel.bonus_init"
+                       value="{{morphe_actuel.bonus_init}}" style="width:100%" />
+              </div>
+            </div>
+            <div class="ep-form-group">
+              <label>Implants / Améliorations / Personnalisations</label>
+              <textarea name="system.morphe_actuel.implants" rows="5"
+                        placeholder="Implants…">{{morphe_actuel.implants}}</textarea>
+            </div>
+            <div class="ep-form-group">
+              <label>Avantages / Aspects</label>
+              <textarea name="system.morphe_actuel.avantages" rows="3"
+                        placeholder="Bonus aptitudes, compétences, aspects…">{{morphe_actuel.avantages}}</textarea>
+            </div>
+            <div class="ep-form-group">
+              <label>Désavantages</label>
+              <textarea name="system.morphe_actuel.desavantages" rows="2"
+                        placeholder="ex: Stigmatisation sociale, Vallée dérangeante…">{{morphe_actuel.desavantages}}</textarea>
+            </div>
+            <div class="ep-form-group">
+              <label>Notes / Traits spéciaux</label>
+              <textarea name="system.morphe_actuel.notes" rows="2"
+                        placeholder="Traits spéciaux du morphe…">{{morphe_actuel.notes}}</textarea>
+            </div>
+            <div class="ep-form-group">
+              <label>Description</label>
+              <textarea name="system.morphe_actuel.description" rows="3"
+                        placeholder="Description physique…">{{morphe_actuel.description}}</textarea>
+            </div>
+          </div>
+          {{#each morphes}}
+          <div class="ep-item" data-item-id="{{this.id}}">
+            <img src="{{this.img}}" class="ep-item-img" />
+            <span class="ep-item-name">{{this.name}}</span>
+            <span class="ep-item-type">[END:{{this.system.endurance}}]</span>
+            <span class="ep-item-controls">
+              <i class="fas fa-edit item-edit"></i>
+              <i class="fas fa-trash item-delete"></i>
+            </span>
+          </div>
+          {{/each}}
+        </div>
+        <div class="ep-col">
+          <h3 class="ep-section-title">Armes de mêlée</h3>
+          {{#if armes_melee.length}}
+          <table class="ep-skills-table" style="margin-bottom:8px">
+            <thead><tr>
+              <th class="ep-th-nom">Arme</th>
+              <th style="width:50px;text-align:center">PA</th>
+              <th style="width:90px;text-align:center">VD</th>
+              <th class="ep-th-spec">Notes</th>
+              <th style="width:110px;text-align:center">Prix</th>
+              <th style="width:70px;text-align:center">Actions</th>
+            </tr></thead>
+            <tbody>
+              {{#each armes_melee}}
+              <tr class="ep-skill-row" data-item-id="{{this.id}}">
+                <td class="ep-td-nom"><span class="ep-skill-name-static">{{this.name}}</span></td>
+                <td style="text-align:center;color:var(--ep-text2)">{{this.system.pa}}</td>
+                <td style="text-align:center;font-weight:bold;color:var(--ep-text)">{{this.system.vd}}{{#if this.system.vd_som}} + BD{{/if}}</td>
+                <td style="font-size:11px;color:var(--ep-text2)">{{this.system.notes}}</td>
+                <td style="text-align:center;font-size:11px;color:var(--ep-accent2)">{{this.cout}}</td>
+                <td style="text-align:center">
+                  <i class="fas fa-dice item-roll-dmg" style="cursor:pointer;color:var(--ep-red2);margin-right:6px" title="Lancer les dommages"></i>
+                  <i class="fas fa-edit item-edit" style="cursor:pointer;color:var(--ep-text2);margin-right:4px"></i>
+                  <i class="fas fa-trash item-delete" style="cursor:pointer;color:var(--ep-text2)"></i>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          {{else}}<p class="ep-empty">Glissez-déposez une Arme de Mêlée ici.</p>{{/if}}
+
+          <h3 class="ep-section-title">Armes à distance</h3>
+          {{#if armes_distance.length}}
+          <table class="ep-skills-table" style="margin-bottom:8px">
+            <thead><tr>
+              <th class="ep-th-nom">Arme</th>
+              <th style="width:50px;text-align:center">PA</th>
+              <th style="width:90px;text-align:center">VD</th>
+              <th style="width:80px;text-align:center">Modes</th>
+              <th style="width:70px;text-align:center">Mun.</th>
+              <th style="width:110px;text-align:center">Prix</th>
+              <th style="width:70px;text-align:center">Actions</th>
+            </tr></thead>
+            <tbody>
+              {{#each armes_distance}}
+              <tr class="ep-skill-row" data-item-id="{{this.id}}">
+                <td class="ep-td-nom"><span class="ep-skill-name-static">{{this.name}}</span></td>
+                <td style="text-align:center;color:var(--ep-text2)">{{this.system.pa}}</td>
+                <td style="text-align:center;font-weight:bold;color:var(--ep-text)">{{this.system.vd}}</td>
+                <td style="text-align:center;font-size:11px;color:var(--ep-text2)">{{this.system.modes}}</td>
+                <td style="text-align:center;font-size:11px;color:var(--ep-text2)">{{this.system.munitions}}/{{this.system.munitions_max}}</td>
+                <td style="text-align:center;font-size:11px;color:var(--ep-accent2)">{{this.cout}}</td>
+                <td style="text-align:center">
+                  <i class="fas fa-dice item-roll-dmg" style="cursor:pointer;color:var(--ep-red2);margin-right:6px" title="Lancer les dommages"></i>
+                  <i class="fas fa-edit item-edit" style="cursor:pointer;color:var(--ep-text2);margin-right:4px"></i>
+                  <i class="fas fa-trash item-delete" style="cursor:pointer;color:var(--ep-text2)"></i>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          {{else}}<p class="ep-empty">Glissez-déposez une Arme à Distance ici.</p>{{/if}}
+
+          <h3 class="ep-section-title">Armures</h3>
+          {{#if armures_items.length}}
+          {{#each armures_items}}
+          <div class="ep-item" data-item-id="{{this.id}}">
+            <img src="{{this.img}}" class="ep-item-img" />
+            <span class="ep-item-name">{{this.name}}</span>
+            <span style="font-size:11px;color:var(--ep-accent2);margin:0 6px">É:{{this.system.ca_energie}} C:{{this.system.ca_cinetique}}</span>
+            <span style="font-size:11px;color:var(--ep-text2);margin-right:6px">💰 {{this.cout}}</span>
+            <span class="ep-item-controls"><i class="fas fa-edit item-edit"></i><i class="fas fa-trash item-delete"></i></span>
+          </div>
+          {{/each}}
+          {{else}}<p class="ep-empty">Glissez-déposez une Armure ici.</p>{{/if}}
+
+          <h3 class="ep-section-title">Équipement de base</h3>
+          <textarea name="system.equipement" rows="4"
+                    placeholder="Équipement divers, muse…">{{equipement}}</textarea>
+          {{#each equipements}}
+          <div class="ep-item" data-item-id="{{this.id}}">
+            <img src="{{this.img}}" class="ep-item-img" />
+            <span class="ep-item-name">{{this.name}}</span>
+            <span style="font-size:11px;color:var(--ep-accent2);margin-right:6px">💰 {{this.cout}}</span>
+            <span class="ep-item-controls">
+              <i class="fas fa-edit item-edit"></i>
+              <i class="fas fa-trash item-delete"></i>
+            </span>
+          </div>
+          {{/each}}
+
+          <h3 class="ep-section-title" style="margin-top:10px">Sauvegardes</h3>
+          <textarea name="system.biographie.notes_sauvegarde" rows="4"
+                    placeholder="Infos de sauvegarde d'égo…">{{biographie.notes_sauvegarde}}</textarea>
+
+          <h3 class="ep-section-title" style="margin-top:8px">Crédits</h3>
+          <input type="number" name="system.biographie.credits"
+                 value="{{biographie.credits}}" min="0" style="width:130px" />
+        </div>
+      </div>
+    </div>
+
+    {{!-- ─── BIOGRAPHIE ────────────────────────────────────── --}}
+    <div class="tab" data-group="primary" data-tab="biographie">
+      <div class="ep-two-col">
+        <div class="ep-col">
+          <div class="ep-form-group">
+            <label>Concept du personnage</label>
+            <textarea name="system.biographie.concept" rows="4"
+                      placeholder="Qui est-il ?">{{biographie.concept}}</textarea>
+          </div>
+          <div class="ep-form-group">
+            <label>Notes diverses</label>
+            <textarea name="system.biographie.notes" rows="8"
+                      placeholder="Notes…">{{biographie.notes}}</textarea>
+          </div>
+        </div>
+        <div class="ep-col">
+          <div class="ep-form-group">
+            <label>Biographie</label>
+            <textarea name="system.biographie.biographie" rows="14"
+                      placeholder="Histoire personnelle…">{{biographie.biographie}}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>{{!-- sheet-body --}}
+</form>

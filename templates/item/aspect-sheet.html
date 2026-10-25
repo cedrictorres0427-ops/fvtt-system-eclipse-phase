@@ -1,0 +1,37 @@
+{{!-- Eclipse Phase — Fiche d'Aspect --}}
+<form class="{{cssClass}} ep-sheet ep-item-sheet" autocomplete="off">
+  <header class="ep-item-header">
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div>
+      <input class="item-name" type="text" name="name" value="{{item.name}}" placeholder="Nom de l'aspect" />
+      <div style="display:flex; gap:8px; margin-top:4px;">
+        <select name="system.type_aspect">
+          <option value="positif" {{#if (eq system.type_aspect "positif")}}selected{{/if}}>Positif</option>
+          <option value="negatif" {{#if (eq system.type_aspect "negatif")}}selected{{/if}}>Négatif</option>
+        </select>
+        <select name="system.ego_ou_morphe">
+          <option value="ego" {{#if (eq system.ego_ou_morphe "ego")}}selected{{/if}}>Ego</option>
+          <option value="morphe" {{#if (eq system.ego_ou_morphe "morphe")}}selected{{/if}}>Morphe</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="ep-form-group">
+    <label>Coût en Points de Personnalisation (PP)</label>
+    <input type="number" name="system.cout_pp" value="{{system.cout_pp}}" min="1" style="width:80px;" />
+    <span style="font-size:11px;color:#7080a0;margin-left:8px;">
+      (Positif = coûte des PP | Négatif = rapporte des PP)
+    </span>
+  </div>
+
+  <div class="ep-form-group">
+    <label>Description</label>
+    <textarea name="system.description" rows="4" placeholder="Description de l'aspect...">{{system.description}}</textarea>
+  </div>
+
+  <div class="ep-form-group">
+    <label>Effets en jeu</label>
+    <textarea name="system.effet" rows="4" placeholder="Bonus, malus, capacités spéciales, restrictions...">{{system.effet}}</textarea>
+  </div>
+</form>

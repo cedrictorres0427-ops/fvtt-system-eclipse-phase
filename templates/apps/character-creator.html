@@ -1,0 +1,368 @@
+<div class="ep-wizard">
+  <!-- Navigation étapes -->
+  <nav class="ep-wiz-nav">
+    {{#each steps as |step i|}}
+    <button type="button" class="ep-wiz-step-btn {{#if (eq ../currentStep i)}}active{{/if}} {{#if step.done}}done{{/if}}"
+            data-step="{{i}}">
+      <span class="ep-wiz-step-num">{{add i 1}}</span>
+      <span class="ep-wiz-step-lbl">{{step.label}}</span>
+    </button>
+    {{/each}}
+  </nav>
+
+  <div class="ep-wiz-body">
+
+    <!-- ── 0 : CONCEPT ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 0)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Concept du personnage</h2>
+      <p class="ep-wiz-hint">Donnez un nom et un concept à votre personnage.</p>
+      <div class="ep-wiz-field"><label>Nom</label>
+        <input type="text" name="nom" value="{{data.nom}}" placeholder="Ex : Tai, Zero, Lune..." /></div>
+      <div class="ep-wiz-field"><label>Concept <small>(en une phrase)</small></label>
+        <input type="text" name="concept" value="{{data.concept}}" placeholder="Ex : Charognard martien spécialiste en récupération d'artefacts TITAN" /></div>
+    </div>
+
+    <!-- ── 1 : HISTORIQUE ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 1)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Historique</h2>
+      <p class="ep-wiz-hint">D'où venez-vous ? L'historique définit votre passé et octroie des bonus de compétences.</p>
+      <div class="ep-wiz-grid-hist">
+        {{#each historiques}}
+        <label class="ep-wiz-card {{#if (eq ../data.historique this.id)}}selected{{/if}}">
+          <input type="radio" name="historique" value="{{this.id}}" {{#if (eq ../data.historique this.id)}}checked{{/if}} />
+          <div class="ep-wiz-card-inner">
+            <div class="ep-wiz-card-title">{{this.nom}}</div>
+            <div class="ep-wiz-card-bonus">{{this.bonusStr}}</div>
+            <div class="ep-wiz-card-morphes">Morphes : {{this.morphes}}</div>
+          </div>
+        </label>
+        {{/each}}
+      </div>
+      {{#if bonus_libres_pending.length}}
+      <div class="ep-wiz-bonus-libres">
+        <h3 class="ep-wiz-bonus-libre-title">⚠ Bonus au choix — sélectionnez vos compétences</h3>
+        {{#each bonus_libres_pending}}
+        <div class="ep-wiz-bonus-libre-row">
+          <span class="ep-bl-label"><b>+{{this.val}} PP</b> : {{this.label}}</span>
+          <div class="ep-bl-select-wrap">
+            {{#if this.is_reseau}}
+              {{!-- Réseau : saisie libre avec suggestions --}}
+              <datalist id="dl-{{this.id}}">
+                {{#each this.reseau_suggestions}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </datalist>
+              <input type="text" class="ep-bl-reseau-inp" list="dl-{{this.id}}"
+                     data-id="{{this.id}}" data-val="{{this.val}}"
+                     placeholder="Nom du réseau (ex: Hypercorps, Criminels...)"
+                     value="{{this.chosen_nom}}" />
+            {{else}}
+              {{!-- Compétence classique : select --}}
+              <select class="ep-bonus-libre-sel" data-id="{{this.id}}" data-val="{{this.val}}" data-type="{{this.type}}">
+                <option value="">— Choisir —</option>
+                {{#each this.skillOptions}}
+                <option value="{{this.key}}" {{#if (eq this.key ../chosen_key)}}selected{{/if}}>
+                  {{this.label}} ({{this.apt}})
+                </option>
+                {{/each}}
+              </select>
+            {{/if}}
+            {{#if this.chosen_key}}<span class="ep-bl-chosen">✓ {{this.chosen_nom}}</span>{{/if}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+
+    <!-- ── 2 : FACTION ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 2)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Faction</h2>
+      <p class="ep-wiz-hint">À quelle faction êtes-vous affilié ? La faction définit votre présent.</p>
+      <div class="ep-wiz-grid-hist">
+        {{#each factions}}
+        <label class="ep-wiz-card {{#if (eq ../data.faction this.id)}}selected{{/if}}">
+          <input type="radio" name="faction" value="{{this.id}}" {{#if (eq ../data.faction this.id)}}checked{{/if}} />
+          <div class="ep-wiz-card-inner">
+            <div class="ep-wiz-card-title">{{this.nom}}</div>
+            <div class="ep-wiz-card-bonus">{{this.bonusStr}}</div>
+          </div>
+        </label>
+        {{/each}}
+      </div>
+      {{#if bonus_libres_pending.length}}
+      <div class="ep-wiz-bonus-libres">
+        <h3 class="ep-wiz-bonus-libre-title">⚠ Bonus au choix — sélectionnez vos compétences</h3>
+        {{#each bonus_libres_pending}}
+        <div class="ep-wiz-bonus-libre-row">
+          <span class="ep-bl-label"><b>+{{this.val}} PP</b> : {{this.label}}</span>
+          <div class="ep-bl-select-wrap">
+            {{#if this.is_reseau}}
+              {{!-- Réseau : saisie libre avec suggestions --}}
+              <datalist id="dl-{{this.id}}">
+                {{#each this.reseau_suggestions}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </datalist>
+              <input type="text" class="ep-bl-reseau-inp" list="dl-{{this.id}}"
+                     data-id="{{this.id}}" data-val="{{this.val}}"
+                     placeholder="Nom du réseau (ex: Hypercorps, Criminels...)"
+                     value="{{this.chosen_nom}}" />
+            {{else}}
+              {{!-- Compétence classique : select --}}
+              <select class="ep-bonus-libre-sel" data-id="{{this.id}}" data-val="{{this.val}}" data-type="{{this.type}}">
+                <option value="">— Choisir —</option>
+                {{#each this.skillOptions}}
+                <option value="{{this.key}}" {{#if (eq this.key ../chosen_key)}}selected{{/if}}>
+                  {{this.label}} ({{this.apt}})
+                </option>
+                {{/each}}
+              </select>
+            {{/if}}
+            {{#if this.chosen_key}}<span class="ep-bl-chosen">✓ {{this.chosen_nom}}</span>{{/if}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+
+    <!-- ── 3 : APTITUDES ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 3)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Aptitudes de départ</h2>
+      <div class="ep-wiz-apt-info">
+        <span>Points à distribuer : <b class="ep-pts-apt-remaining">{{aptRemaining}}</b> / 105</span>
+        <span class="ep-wiz-rule">Min 5 · Max 30</span>
+      </div>
+      <div class="ep-wiz-apts">
+        {{#each aptitudes}}
+        <div class="ep-wiz-apt-row">
+          <label class="ep-wiz-apt-lbl">{{this.abr}}<small>{{this.nom}}</small></label>
+          <button type="button" class="ep-apt-btn ep-apt-minus" data-apt="{{this.key}}">−</button>
+          <input type="number" class="ep-apt-input" name="apt_{{this.key}}" value="{{this.value}}" min="5" max="30" data-apt="{{this.key}}" />
+          <button type="button" class="ep-apt-btn ep-apt-plus" data-apt="{{this.key}}">+</button>
+          <span class="ep-wiz-apt-hint">{{this.hint}}</span>
+        </div>
+        {{/each}}
+      </div>
+      <div class="ep-wiz-derive">
+        <span>Langue natale : <b>{{langNatale}}</b></span>
+        <span>Audace départ : <b>1</b></span>
+        <span>Crédits : <b>5 000</b></span>
+        <span>Réputation : <b>50 pts</b></span>
+      </div>
+    </div>
+
+    <!-- ── 4 : COMPÉTENCES ACTIVES ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 4)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Compétences actives <small>(min. 400 PP)</small></h2>
+      <div class="ep-wiz-pp-bar">
+        <span>PP restants : <b class="ep-pp-left">{{ppLeft}}</b></span>
+        <span>PP actives : <b class="ep-pp-act">{{ppSpentActives}}</b> / 400 min {{#if actOk}}✓{{else}}<span class="ep-warn">⚠</span>{{/if}}</span>
+      </div>
+      <div class="ep-wiz-sk-table">
+        {{#each competences_actives}}
+        <div class="ep-wiz-sk-row" data-key="{{this.key}}" data-apt="{{this.aptitude}}" data-category="actives">
+          <div class="ep-wiz-sk-name">
+            {{#if this.placeholder}}
+              <input type="text" class="ep-sk-nom-inp" name="sk_nom_{{this.key}}" value="{{this.nom}}" placeholder="{{this.placeholder}}" />
+            {{else}}
+              <span>{{this.nom}}</span>
+            {{/if}}
+            <small class="ep-wiz-sk-apt">{{this.aptAbr}}</small>
+          </div>
+          <div class="ep-wiz-sk-score">
+            <span class="ep-sk-base-val">{{this.aptBase}}</span>+
+            <button type="button" class="ep-sk-btn ep-sk-minus" data-key="{{this.key}}">−</button>
+            <input type="number" class="ep-sk-pp-inp" name="sk_pp_{{this.key}}" value="{{this.ppInvest}}" min="0" data-key="{{this.key}}" data-apt="{{this.aptitude}}" data-category="actives" />
+            <button type="button" class="ep-sk-btn ep-sk-plus2" data-key="{{this.key}}" data-category="actives">+</button>=
+            <span class="ep-sk-total {{#if (gt60 this.total)}}ep-sk-over60{{/if}}" title="{{#if this.bonusHistFact}}Dont +{{this.bonusHistFact}} bonus hist./faction{{/if}}">{{this.total}}</span>
+            <span class="ep-sk-cost">({{this.ppCout}} PP)</span>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <!-- ── 5 : COMPÉTENCES CONNAISSANCE ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 5)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Compétences de connaissance <small>(min. 300 PP)</small></h2>
+      <div class="ep-wiz-pp-bar">
+        <span>PP restants : <b class="ep-pp-left">{{ppLeft}}</b></span>
+        <span>PP connais. : <b class="ep-pp-con">{{ppSpentConnais}}</b> / 300 min {{#if conOk}}✓{{else}}<span class="ep-warn">⚠</span>{{/if}}</span>
+      </div>
+      <div class="ep-wiz-sk-table">
+        {{#each competences_connaissances}}
+        <div class="ep-wiz-sk-row" data-key="{{this.key}}" data-apt="{{this.aptitude}}" data-category="connaissances">
+          <div class="ep-wiz-sk-name">
+            <input type="text" class="ep-sk-nom-inp" name="sk_nom_{{this.key}}" value="{{this.nom}}" placeholder="{{this.placeholder}}" />
+            <small class="ep-wiz-sk-apt">{{this.aptAbr}}</small>
+          </div>
+          <div class="ep-wiz-sk-score">
+            <span class="ep-sk-base-val">{{this.aptBase}}</span>+
+            <button type="button" class="ep-sk-btn ep-sk-minus" data-key="{{this.key}}">−</button>
+            <input type="number" class="ep-sk-pp-inp" name="sk_pp_{{this.key}}" value="{{this.ppInvest}}" min="0" data-key="{{this.key}}" data-apt="{{this.aptitude}}" data-category="connaissances" />
+            <button type="button" class="ep-sk-btn ep-sk-plus2" data-key="{{this.key}}" data-category="connaissances">+</button>=
+            <span class="ep-sk-total {{#if (gt60 this.total)}}ep-sk-over60{{/if}}">{{this.total}}</span>
+            <span class="ep-sk-cost">({{this.ppCout}} PP)</span>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <!-- ── 6 : ASPECTS ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 6)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Aspects</h2>
+      <p class="ep-wiz-hint">Positifs (coûtent des PP) · Négatifs (rapportent des PP, max 50 PP) · PP restants : <b>{{ppLeft}}</b></p>
+      <div class="ep-wiz-aspects-layout">
+        <div class="ep-wiz-asp-col">
+          <h3 class="ep-wiz-asp-title ep-asp-pos-title">Aspects positifs</h3>
+          {{#if aspects_pos.length}}
+          <div class="ep-wiz-asp-list">
+            {{#each aspects_pos}}
+            <div class="ep-wiz-asp-row">
+              <div class="ep-wiz-asp-lbl">
+                <span class="ep-asp-nom">{{this.name}}</span>
+                <span class="ep-asp-cout ep-asp-cout-pos">{{this.system.cout_pp}} PP</span>
+                <span class="ep-asp-desc-txt">{{this.system.description}}</span>
+              </div>
+              <button type="button" class="ep-asp-add-btn ep-asp-add-pos"
+                data-id="{{this._id}}" data-nom="{{this.name}}"
+                data-cout="{{this.system.cout_pp}}" data-type="positif">+</button>
+            </div>
+            {{/each}}
+          </div>
+          {{else}}<p class="ep-wiz-hint">Chargement des aspects...</p>{{/if}}
+        </div>
+        <div class="ep-wiz-asp-col">
+          <h3 class="ep-wiz-asp-title ep-asp-neg-title">Aspects négatifs <small>(PP gagnés)</small></h3>
+          {{#if aspects_neg.length}}
+          <div class="ep-wiz-asp-list">
+            {{#each aspects_neg}}
+            <div class="ep-wiz-asp-row">
+              <div class="ep-wiz-asp-lbl">
+                <span class="ep-asp-nom">{{this.name}}</span>
+                <span class="ep-asp-cout ep-asp-cout-neg">+{{this.system.cout_pp}} PP</span>
+                <span class="ep-asp-desc-txt">{{this.system.description}}</span>
+              </div>
+              <button type="button" class="ep-asp-add-btn ep-asp-add-neg"
+                data-id="{{this._id}}" data-nom="{{this.name}}"
+                data-cout="{{this.system.cout_pp}}" data-type="negatif">+</button>
+            </div>
+            {{/each}}
+          </div>
+          {{else}}<p class="ep-wiz-hint">Chargement des aspects...</p>{{/if}}
+        </div>
+      </div>
+      {{#if aspects_choisis.length}}
+      <div class="ep-wiz-asp-chosen">
+        <h3 class="ep-wiz-asp-title">Aspects sélectionnés</h3>
+        {{#each aspects_choisis}}
+        <div class="ep-wiz-asp-chosen-row">
+          <span class="ep-asp-nom {{#if (eq this.type "negatif")}}ep-asp-neg-nom{{/if}}">{{this.nom}}</span>
+          <span class="ep-asp-cout {{#if (eq this.type "negatif")}}ep-asp-cout-neg{{else}}ep-asp-cout-pos{{/if}}">
+            {{#if (eq this.type "negatif")}}+{{/if}}{{this.cout_pp}} PP
+          </span>
+          <button type="button" class="ep-asp-remove-btn" data-id="{{this.id}}">✕</button>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+
+    <!-- ── 7 : AUTRES PP ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 7)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Autres dépenses PP</h2>
+      <div class="ep-wiz-pp-banner">PP restants : <b>{{ppLeft}}</b></div>
+
+      <div class="ep-wiz-section">
+        <h3>Audace <small>15 PP = 1 pt · max 10</small></h3>
+        <div class="ep-wiz-inline">
+          <button type="button" class="ep-apt-btn" id="aud-minus">−</button>
+          <input type="number" name="audace" value="{{data.audace}}" min="1" max="10" class="ep-aud-inp" />
+          <button type="button" class="ep-apt-btn" id="aud-plus">+</button>
+          <span class="ep-wiz-cost">Coût : {{audCost}} PP</span>
+        </div>
+      </div>
+
+      <div class="ep-wiz-section">
+        <h3>Réputation</h3>
+        <div class="ep-rep-rules">
+          <span>🎁 <b>{{repGratuitsMax}} pts gratuits</b> à répartir librement · max 80/réseau</span>
+          <span>Au-delà : 1 PP = 10 pts supplémentaires · max 35 PP</span>
+        </div>
+        <div class="ep-rep-gratuits-bar">
+          Points gratuits utilisés : <b class="{{#if repGratuitOk}}ep-ok{{else}}ep-over{{/if}}">{{repGratuits}}</b> / {{repGratuitsMax}}
+          {{#if repGratuitOk}}<span class="ep-rep-reste"> ({{repGratuitsRestants}} pts libres restants)</span>{{/if}}
+        </div>
+        {{#each reps}}
+        <div class="ep-wiz-rep-row">
+          <span class="ep-rep-nom">{{this.nom}}</span>
+          <input type="number" name="rep_{{this.key}}" value="{{this.value}}" min="0" max="80" class="ep-rep-inp" data-rep="{{this.key}}" />
+          <span class="ep-rep-hint">pts total</span>
+        </div>
+        {{/each}}
+        <div class="ep-wiz-rep-total">PP dépensés en réputation : <b>{{ppRep}}</b> / 35 max</div>
+      </div>
+
+      <div class="ep-wiz-section">
+        <h3>Crédits supplémentaires <small>1 PP = 1 000 crédits · max 100 PP</small></h3>
+        <div class="ep-wiz-inline">
+          <input type="number" name="credits_bonus" value="{{data.credits_bonus}}" min="0" max="100000" step="1000" class="ep-cred-inp" />
+          <span class="ep-wiz-cost">PP : <b>{{ppCred}}</b> / 100 max</span>
+        </div>
+      </div>
+
+      <div class="ep-wiz-section">
+        <h3>Morphe de départ</h3>
+        <select name="morphe_id" class="ep-morphe-sel">
+          <option value="">— Aucun / choisir plus tard —</option>
+          {{#each morphes}}
+          <option value="{{this._id}}" {{#if (eq ../data.morphe_id this._id)}}selected{{/if}}>
+            {{this.name}} ({{this.system.type_morphe}} · {{this.system.cout_pp}} PP)
+          </option>
+          {{/each}}
+        </select>
+        <span class="ep-wiz-cost">PP morphe : <b>{{ppMorphe}}</b></span>
+      </div>
+    </div>
+
+    <!-- ── 8 : FINALISATION ── -->
+    <div class="ep-wiz-panel {{#if (eq currentStep 8)}}active{{/if}}">
+      <h2 class="ep-wiz-title">Motivations & Finalisation</h2>
+
+      <div class="ep-wiz-section">
+        <h3>Trois motivations personnelles</h3>
+        <p class="ep-wiz-hint-sm">Ex : +Anarchisme, −Hypercorps, +Survie</p>
+        <input type="text" name="motiv1" value="{{data.motiv1}}" placeholder="Motivation 1" />
+        <input type="text" name="motiv2" value="{{data.motiv2}}" placeholder="Motivation 2" />
+        <input type="text" name="motiv3" value="{{data.motiv3}}" placeholder="Motivation 3" />
+      </div>
+
+      <div class="ep-wiz-section">
+        <h3>Récapitulatif</h3>
+        <table class="ep-wiz-recap">
+          <tr><td>Personnage</td><td><b>{{data.nom}}</b></td></tr>
+          <tr><td>Historique</td><td>{{histNom}}</td></tr>
+          <tr><td>Faction</td><td>{{factNom}}</td></tr>
+          <tr><td>PP restants</td><td class="{{#if ppNeg}}ep-neg{{/if}}"><b>{{ppLeft}}</b></td></tr>
+          <tr><td>Actives</td><td>{{ppSpentActives}} PP {{#if actOk}}✓{{else}}<span class="ep-warn">⚠ min 400</span>{{/if}}</td></tr>
+          <tr><td>Connaissances</td><td>{{ppSpentConnais}} PP {{#if conOk}}✓{{else}}<span class="ep-warn">⚠ min 300</span>{{/if}}</td></tr>
+          <tr><td>Aspects</td><td>{{aspects_choisis.length}} aspect(s) · {{ppAspects}} PP</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /.ep-wiz-body -->
+
+  <div class="ep-wiz-footer">
+    <button type="button" class="ep-wiz-btn ep-wiz-prev" {{#if (eq currentStep 0)}}disabled{{/if}}>← Précédent</button>
+    <div class="ep-wiz-pp-display">PP : <b>{{ppLeft}}</b></div>
+    {{#if (eq currentStep 8)}}
+    <button type="button" class="ep-wiz-btn ep-wiz-create ep-btn-primary">⚡ Créer le personnage</button>
+    {{else}}
+    <button type="button" class="ep-wiz-btn ep-wiz-next">Suivant →</button>
+    {{/if}}
+  </div>
+</div>

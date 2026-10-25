@@ -1,0 +1,51 @@
+{{!-- Eclipse Phase — Fiche de Passe Psi --}}
+<form class="{{cssClass}} ep-sheet ep-item-sheet" autocomplete="off">
+  <header class="ep-item-header">
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div>
+      <input class="item-name" type="text" name="name" value="{{item.name}}" placeholder="Nom de la passe psi" />
+      <div style="display:flex; gap:8px; margin-top:4px;">
+        <select name="system.type_psi" title="Niveau de la passe">
+          <option value="chi" {{#if (eq system.type_psi "chi")}}selected{{/if}}>Chi (Psi niv. 1)</option>
+          <option value="gamma" {{#if (eq system.type_psi "gamma")}}selected{{/if}}>Gamma (Psi niv. 2)</option>
+          <option value="epsilon" {{#if (eq system.type_psi "epsilon")}}selected{{/if}}>Epsilon (exsurgent, niv. 3)</option>
+        </select>
+        <select name="system.activation" title="Mode d'utilisation — indépendant du niveau Chi/Gamma">
+          <option value="passif" {{#if (eq activationEffective "passif")}}selected{{/if}}>Passif</option>
+          <option value="actif"  {{#if (eq activationEffective "actif")}}selected{{/if}}>Actif</option>
+        </select>
+        <select name="system.action">
+          <option value="Automatique" {{#if (eq system.action "Automatique")}}selected{{/if}}>Automatique (AA)</option>
+          <option value="Rapide" {{#if (eq system.action "Rapide")}}selected{{/if}}>Rapide (AR)</option>
+          <option value="Complexe" {{#if (eq system.action "Complexe")}}selected{{/if}}>Complexe (AC)</option>
+          <option value="Longue" {{#if (eq system.action "Longue")}}selected{{/if}}>Longue (AL)</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <div class="ep-form-row">
+    <div class="ep-form-group ep-form-group-sm">
+      <label>Durée</label>
+      <input type="text" name="system.duree" value="{{system.duree}}" placeholder="ex: Tour / Permanent" />
+    </div>
+    <div class="ep-form-group ep-form-group-sm">
+      <label>Portée</label>
+      <input type="text" name="system.portee" value="{{system.portee}}" placeholder="ex: Contact / LdV" />
+    </div>
+    <div class="ep-form-group ep-form-group-sm">
+      <label>Tension (Strain)</label>
+      <input type="number" name="system.strain" value="{{system.strain}}" min="0" />
+    </div>
+  </div>
+
+  <div class="ep-form-group">
+    <label>Description</label>
+    <textarea name="system.description" rows="3" placeholder="Description de la passe psi...">{{system.description}}</textarea>
+  </div>
+
+  <div class="ep-form-group">
+    <label>Effets en jeu</label>
+    <textarea name="system.effet" rows="5" placeholder="Effets de la passe, compétence utilisée, modificateurs, résistance...">{{system.effet}}</textarea>
+  </div>
+</form>

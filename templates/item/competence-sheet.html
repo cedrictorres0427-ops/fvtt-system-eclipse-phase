@@ -1,0 +1,42 @@
+{{!-- Eclipse Phase — Fiche Compétence (pour PNJ drag & drop) --}}
+<form class="{{cssClass}} ep-sheet ep-item-sheet" autocomplete="off">
+  <header class="ep-item-header">
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div>
+      <input class="item-name" type="text" name="name" value="{{item.name}}" placeholder="Nom de la compétence" />
+      <div style="font-size:11px;color:var(--ep-text2);margin-top:2px">Compétence — utilisable pour les PNJ</div>
+    </div>
+  </header>
+  <div style="padding:10px;display:flex;flex-wrap:wrap;gap:12px">
+    <div class="ep-form-group" style="min-width:120px">
+      <label>Aptitude liée</label>
+      <select name="system.aptitude" style="width:100%">
+        <option value="cog" {{#if (eq system.aptitude "cog")}}selected{{/if}}>COG — Cognition</option>
+        <option value="coo" {{#if (eq system.aptitude "coo")}}selected{{/if}}>COO — Coordination</option>
+        <option value="int" {{#if (eq system.aptitude "int")}}selected{{/if}}>INT — Intuition</option>
+        <option value="ref" {{#if (eq system.aptitude "ref")}}selected{{/if}}>RÉF — Réflexes</option>
+        <option value="ast" {{#if (eq system.aptitude "ast")}}selected{{/if}}>AST — Astuce</option>
+        <option value="som" {{#if (eq system.aptitude "som")}}selected{{/if}}>SOM — Somatique</option>
+        <option value="vol" {{#if (eq system.aptitude "vol")}}selected{{/if}}>VOL — Volonté</option>
+      </select>
+    </div>
+    <div class="ep-form-group">
+      <label>Valeur entraînée (PP au-dessus de l'APT)</label>
+      <input type="number" name="system.valeur" value="{{system.valeur}}" min="0" max="99" style="width:70px" />
+    </div>
+    <div class="ep-form-group">
+      <label>Non utilisable par défaut</label>
+      <input type="checkbox" name="system.no_default" {{#if system.no_default}}checked{{/if}} />
+    </div>
+  </div>
+  <div style="padding:0 10px 10px">
+    <div class="ep-form-group">
+      <label>Spécialisation (+10 au jet)</label>
+      <input type="text" name="system.specialisation" value="{{system.specialisation}}" placeholder="ex: Pistolets" />
+    </div>
+    <div class="ep-form-group">
+      <label>Description / Notes</label>
+      <textarea name="system.description" rows="3" placeholder="Notes sur cette compétence…">{{system.description}}</textarea>
+    </div>
+  </div>
+</form>

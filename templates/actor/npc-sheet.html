@@ -1,0 +1,249 @@
+{{!-- Eclipse Phase — Fiche PNJ simplifiée --}}
+<form class="{{cssClass}} ep-sheet ep-npc-sheet" autocomplete="off">
+
+  {{!-- En-tête --}}
+  <header class="ep-npc-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" style="width:56px;height:56px;border:2px solid var(--ep-accent);border-radius:4px;object-fit:cover;cursor:pointer;flex-shrink:0" />
+    <div class="ep-npc-info">
+      <input class="charname" type="text" name="name" value="{{actor.name}}" placeholder="Nom du PNJ" style="font-size:17px;font-weight:bold;background:transparent;border:none;border-bottom:1px solid var(--ep-border);color:var(--ep-bright);width:100%;margin-bottom:4px" />
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:4px">
+          <label style="font-size:10px;color:var(--ep-text2);white-space:nowrap">Faction</label>
+          <input type="text" name="system.biographie.faction" value="{{biographie.faction}}" placeholder="—" style="width:120px" />
+        </div>
+        <div style="display:flex;align-items:center;gap:4px">
+          <label style="font-size:10px;color:var(--ep-text2);white-space:nowrap">Morphe</label>
+          <input type="text" name="system.morphe_actuel.nom" value="{{morphe_actuel.nom}}" placeholder="—" style="width:110px" />
+          <select name="system.morphe_actuel.type" style="width:90px;font-size:11px">
+            <option value="biomorphe"    {{#if (eq morphe_actuel.type "biomorphe")}}selected{{/if}}>Biomorphe</option>
+            <option value="synthomorphe" {{#if (eq morphe_actuel.type "synthomorphe")}}selected{{/if}}>Synthomorphe</option>
+            <option value="infomorphe"   {{#if (eq morphe_actuel.type "infomorphe")}}selected{{/if}}>Infomorphe</option>
+            <option value="pod"          {{#if (eq morphe_actuel.type "pod")}}selected{{/if}}>Pod</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- Aptitudes compactes --}}
+  <div class="ep-npc-aptitudes">
+    <table class="ep-apt-table">
+      <thead>
+        <tr>
+          <th style="width:60px"></th>
+          <th class="ep-apt-col">COG</th><th class="ep-apt-col">COO</th>
+          <th class="ep-apt-col">INT</th><th class="ep-apt-col">RÉF</th>
+          <th class="ep-apt-col">AST</th><th class="ep-apt-col">SOM</th>
+          <th class="ep-apt-col">VOL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ep-apt-row">
+          <td class="ep-apt-row-lbl">Base</td>
+          {{#each aptitudes as |apt key|}}
+          <td><input type="number" name="system.aptitudes.{{key}}.base" value="{{apt.base}}" min="1" max="30" class="ep-apt-inp" /></td>
+          {{/each}}
+        </tr>
+        <tr class="ep-apt-row ep-apt-bonus-row">
+          <td class="ep-apt-row-lbl">Morphe</td>
+          {{#each aptitudes as |apt key|}}
+          <td><input type="number" name="system.aptitudes.{{key}}.morphe" value="{{apt.morphe}}" class="ep-apt-inp ep-apt-bonus" /></td>
+          {{/each}}
+        </tr>
+        <tr class="ep-apt-row ep-apt-total-row">
+          <td class="ep-apt-row-lbl">Total</td>
+          {{#each aptitudes as |apt key|}}
+          <td><span class="ep-apt-total apt-roll" data-apt-key="{{key}}" title="Lancer {{apt.abr}}">{{apt.total}}</span></td>
+          {{/each}}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {{!-- Stats + santé compactes --}}
+  <div class="ep-npc-stats-row">
+    <div class="ep-npc-carac-block">
+      {{!-- LUC / ST / SA --}}
+      <div class="ep-carac-box ep-carac-ego" title="Lucidité = VOL×2">
+        <span class="ep-carac-lbl">LUC</span>
+        <span class="ep-carac-val">{{stats.luc.value}}</span>
+        <span class="ep-carac-form">VOL×2</span>
+      </div>
+      <div class="ep-carac-box ep-carac-ego" title="Seuil de Trauma = LUC/5↑">
+        <span class="ep-carac-lbl">ST</span><span class="ep-carac-val">{{stats.st.value}}</span>
+      </div>
+      <div class="ep-carac-box ep-carac-ego" title="Seuil d'Aliénation = LUC×2">
+        <span class="ep-carac-lbl">SA</span><span class="ep-carac-val">{{stats.sa.value}}</span>
+      </div>
+      {{!-- END / SB / SM --}}
+      <div class="ep-carac-box ep-carac-morphe" title="Endurance">
+        <span class="ep-carac-lbl">END</span>
+        <input type="number" name="system.stats.end.value" value="{{stats.end.value}}" min="1" class="ep-carac-input" />
+      </div>
+      <div class="ep-carac-box ep-carac-morphe" title="Seuil de Blessure = END/5↑">
+        <span class="ep-carac-lbl">SB</span><span class="ep-carac-val">{{stats.sb.value}}</span>
+      </div>
+      <div class="ep-carac-box ep-carac-morphe" title="Seuil de Mort">
+        <span class="ep-carac-lbl">SM</span><span class="ep-carac-val">{{stats.sm.value}}</span>
+      </div>
+      {{!-- INIT / RAP / BD --}}
+      <div class="ep-carac-box ep-carac-ego" title="Initiative">
+        <span class="ep-carac-lbl">INIT</span><span class="ep-carac-val">{{stats.init.value}}</span>
+      </div>
+      <div class="ep-carac-box ep-carac-morphe" title="Rapidité">
+        <span class="ep-carac-lbl">RAP</span>
+        <input type="number" name="system.stats.rap.value" value="{{stats.rap.value}}" min="1" max="4" class="ep-carac-input" />
+      </div>
+      <div class="ep-carac-box ep-carac-ego" title="Bonus de Dommages = SOM/10↓">
+        <span class="ep-carac-lbl">BD</span><span class="ep-carac-val">{{stats.bd.value}}</span>
+      </div>
+      {{!-- AUD --}}
+      <div class="ep-carac-box ep-carac-ego" title="Audace">
+        <span class="ep-carac-lbl">AUD</span>
+        <input type="number" name="system.stats.aud.value" value="{{stats.aud.value}}" min="0" max="10" class="ep-carac-input" />
+      </div>
+    </div>
+  </div>
+
+  {{!-- Dommages / Armure / Barre de vie --}}
+  <div class="ep-dsbar" style="padding:6px 10px">
+    <div class="ep-ds-phys">
+      <div class="ep-ds-labels"><span>DOMMAGES</span><span>BLESSURES</span></div>
+      <div class="ep-ds-vals">
+        <input type="number" name="system.stats.dommages.value" value="{{stats.dommages.value}}" min="0" class="ep-ds-input" />
+        <span class="ep-ds-sep">/{{stats.end.max}}</span>
+        <span class="ep-ds-badge">{{stats.blessures.value}}</span>
+        {{#if stats.blessures.value}}<span class="ep-malus-tag">−{{stats.malus_actions.value}}</span>{{/if}}
+      </div>
+      <div class="ep-ds-hints">SB {{stats.sb.value}} · SM {{stats.sm.value}}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+      <div class="ep-armor-mini">
+        <label>ARM É</label>
+        <input type="number" name="system.armure.energie"   value="{{armure.energie}}"   min="0" class="ep-armor-inp" />
+        <label>C</label>
+        <input type="number" name="system.armure.cinetique" value="{{armure.cinetique}}" min="0" class="ep-armor-inp" />
+      </div>
+      <button type="button" class="btn-dmg-apply ep-btn-small">± DMG</button>
+    </div>
+  </div>
+
+  {{!-- Onglets --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="stats">Compétences</a>
+    <a class="item" data-tab="combat">Combat</a>
+    <a class="item" data-tab="notes">Notes</a>
+  </nav>
+
+  <div class="sheet-body">
+
+    {{!-- COMPÉTENCES (via drag & drop d'items "competence") --}}
+    <div class="tab" data-group="primary" data-tab="stats">
+      <p style="font-size:11px;color:var(--ep-text2);margin-bottom:6px;padding:4px 6px;background:var(--ep-bg-panel);border:1px solid var(--ep-border);border-radius:4px">
+        Glissez-déposez des items <b>Compétence</b> depuis le Compendium pour ajouter des compétences à ce PNJ.
+        TOTAL = APT + Valeur entraînée.
+      </p>
+      {{#if competences_items.length}}
+      <table class="ep-skills-table">
+        <thead>
+          <tr>
+            <th class="ep-th-nom">Compétence</th>
+            <th class="ep-th-apt">APT.</th>
+            <th class="ep-th-num" style="width:60px">Valeur</th>
+            <th class="ep-th-total">TOTAL</th>
+            <th style="width:80px">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each competences_items as |item|}}
+          <tr class="ep-skill-row" data-item-id="{{item.id}}">
+            <td class="ep-td-nom">
+              <span class="ep-skill-name-static">{{item.name}}</span>
+              {{#if item.system.specialisation}}
+                <span style="font-size:10px;color:var(--ep-accent2);margin-left:4px">[{{item.system.specialisation}}]</span>
+              {{/if}}
+            </td>
+            <td class="ep-td-apt">
+              <span class="ep-apt-abr">{{item._aptAbr}}</span>
+              <span class="ep-apt-val">{{item._aptVal}}</span>
+            </td>
+            <td class="ep-td-num">
+              <input type="number" data-item-id="{{item.id}}" data-field="system.valeur" value="{{item.system.valeur}}" min="0" max="99" class="ep-num-inp ep-item-field" style="width:50px" />
+            </td>
+            <td class="ep-td-total">
+              <span class="skill-roll-npc ep-skill-total" title="🎲 Lancer {{item.name}}">{{item._total}}</span>
+            </td>
+            <td style="text-align:center">
+              <i class="fas fa-edit item-edit" style="cursor:pointer;color:var(--ep-text2);margin-right:6px"></i>
+              <i class="fas fa-trash item-delete" style="cursor:pointer;color:var(--ep-text2)"></i>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+      <p class="ep-empty">Aucune compétence. Glissez-déposez des items "Compétence" ici.</p>
+      {{/if}}
+    </div>
+
+    {{!-- COMBAT --}}
+    <div class="tab" data-group="primary" data-tab="combat">
+      <h3 class="ep-section-title">Armes</h3>
+      {{#if armes_items.length}}
+      <table class="ep-skills-table">
+        <thead>
+          <tr>
+            <th class="ep-th-nom">Arme</th>
+            <th style="width:50px;text-align:center">PA</th>
+            <th style="width:90px;text-align:center">VD</th>
+            <th class="ep-th-spec">Notes</th>
+            <th style="width:110px;text-align:center">Prix</th>
+            <th style="width:90px;text-align:center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each armes_items as |item|}}
+          <tr class="ep-skill-row" data-item-id="{{item.id}}">
+            <td class="ep-td-nom"><span class="ep-skill-name-static">{{item.name}}</span></td>
+            <td style="text-align:center;color:var(--ep-text2)">{{item.system.pa}}</td>
+            <td style="text-align:center;font-weight:bold;color:var(--ep-text)">{{item.system.vd}}</td>
+            <td style="font-size:11px;color:var(--ep-text2)">{{item.system.notes}}</td>
+            <td style="text-align:center;font-size:11px;color:var(--ep-accent2)">{{item.cout}}</td>
+            <td style="text-align:center;white-space:nowrap">
+              <i class="fas fa-dice item-roll-dmg" style="cursor:pointer;color:var(--ep-red2);margin-right:6px" title="🎲 Lancer dommages"></i>
+              <i class="fas fa-edit item-edit" style="cursor:pointer;color:var(--ep-text2);margin-right:4px" title="Modifier"></i>
+              <i class="fas fa-trash item-delete" style="cursor:pointer;color:var(--ep-text2)" title="Supprimer"></i>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+      <p class="ep-empty">Aucune arme. Glissez-déposez des items Arme ici.</p>
+      {{/if}}
+
+      <h3 class="ep-section-title">Équipement</h3>
+      {{#each equip_items as |item|}}
+      <div class="ep-item" data-item-id="{{item.id}}">
+        <img src="{{item.img}}" class="ep-item-img" />
+        <span class="ep-item-name">{{item.name}}</span>
+        <span style="font-size:11px;color:var(--ep-accent2);margin-right:6px">💰 {{item.cout}}</span>
+        <span class="ep-item-controls"><i class="fas fa-edit item-edit"></i><i class="fas fa-trash item-delete"></i></span>
+      </div>
+      {{/each}}
+    </div>
+
+    {{!-- NOTES --}}
+    <div class="tab" data-group="primary" data-tab="notes">
+      <div class="ep-form-group">
+        <label>Concept / Description</label>
+        <textarea name="system.biographie.concept" rows="4" placeholder="Qui est ce PNJ ?">{{biographie.concept}}</textarea>
+      </div>
+      <div class="ep-form-group">
+        <label>Notes MJ</label>
+        <textarea name="system.biographie.notes" rows="8" placeholder="Notes pour le MJ…">{{biographie.notes}}</textarea>
+      </div>
+    </div>
+
+  </div>
+</form>

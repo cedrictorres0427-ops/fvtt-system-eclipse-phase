@@ -1,0 +1,127 @@
+{
+  "EP": {
+    "SheetActor": "Fiche de Personnage",
+    "SheetNPC": "Fiche PNJ",
+    "SheetItem": "Fiche Objet",
+
+    "Aptitudes": "Aptitudes",
+    "COG": "Cognition",
+    "COO": "Coordination",
+    "INT": "Intuition",
+    "REF": "Réflexes",
+    "AST": "Astuce",
+    "SOM": "Somatique",
+    "VOL": "Volonté",
+
+    "Stats": {
+      "INIT": "Initiative",
+      "RAP": "Rapidité",
+      "END": "Endurance",
+      "SB": "Seuil de Blessure",
+      "SM": "Seuil de Mort",
+      "LUC": "Lucidité",
+      "ST": "Seuil de Trauma",
+      "SA": "Seuil d'Aliénation",
+      "AUD": "Audace",
+      "BD": "Bonus de Dommages",
+      "DOMMAGES": "Dommages",
+      "BLESSURES": "Blessures",
+      "STRESS": "Stress",
+      "TRAUMAS": "Traumas"
+    },
+
+    "Tabs": {
+      "Competences": "Compétences Actives",
+      "Connaissances": "Connaissances",
+      "Reputation": "Réputation",
+      "Equipement": "Équipement",
+      "Biographie": "Biographie"
+    },
+
+    "Rolls": {
+      "Reussite": "Réussite",
+      "Echec": "Échec",
+      "CritiqueReussite": "RÉUSSITE CRITIQUE",
+      "CritiqueEchec": "ÉCHEC CRITIQUE",
+      "ReussiteExceptionnelle": "Réussite Exceptionnelle",
+      "EchecCuisant": "Échec Cuisant",
+      "JetDouble": "Jet Double",
+      "MargeReussite": "Marge de Réussite",
+      "MargeEchec": "Marge d'Échec",
+      "Seuil": "Seuil de difficulté",
+      "Modificateur": "Modificateur"
+    },
+
+    "Difficultes": {
+      "SansEffort": "Sans effort (+30)",
+      "Simple": "Simple (+20)",
+      "Facile": "Facile (+10)",
+      "Moyen": "Moyen (0)",
+      "Difficile": "Difficile (-10)",
+      "Defi": "Défi (-20)",
+      "Expert": "Expert (-30)"
+    },
+
+    "Reputation": {
+      "Arep": "@-Rép (Anarchistes)",
+      "Crep": "C-Rép (CivicNet)",
+      "Erep": "E-Rép (VaguÉco)",
+      "Frep": "F-Rép (Fame)",
+      "Grep": "G-Rép (Guanxi/Crime)",
+      "Irep": "I-Rép (L'Œil/Firewall)",
+      "Rrep": "R-Rép (RRA/Recherche)"
+    },
+
+    "Items": {
+      "Morphe": "Morphe",
+      "Equipement": "Équipement",
+      "Aspect": "Aspect",
+      "PassePsi": "Passe Psi",
+
+      "TypesMorphe": {
+        "biomorphe": "Biomorphe",
+        "synthomorphe": "Synthomorphe",
+        "infomorphe": "Infomorphe",
+        "pod": "Pod",
+        "neotenal": "Néoténal",
+        "cosse": "Cosse"
+      },
+
+      "TypesEquipement": {
+        "arme_melee": "Arme de mêlée",
+        "arme_distance": "Arme à distance",
+        "armure": "Armure",
+        "implant": "Implant",
+        "electronique": "Électronique",
+        "drogue": "Drogue/Substrat",
+        "nanogear": "Nanogear",
+        "vehicule": "Véhicule",
+        "divers": "Divers"
+      },
+
+      "Couts": {
+        "Gratuit": "Gratuit (—)",
+        "Modique": "Modique (1 à 99 cr., moy. 50)",
+        "Bas": "Bas (100 à 499 cr., moy. 250)",
+        "Moyen": "Moyen (500 à 1 499 cr., moy. 1 000)",
+        "Élevé": "Élevé (1 500 à 9 999 cr., moy. 5 000)",
+        "Onéreux": "Onéreux (10 000 cr. et +, moy. 20 000)"
+      },
+
+      "TypesPsi": {
+        "chi": "Chi",
+        "gamma": "Gamma"
+      },
+      "ActivationPsi": {
+        "passif": "Passif",
+        "actif": "Actif"
+      }
+    },
+
+    "Errors": {
+      "SkillNotFound": "Compétence introuvable.",
+      "NoAudace": "n'a plus de points d'Audace !",
+      "NoTarget": "Sélectionne un token cible pour le test opposé."
+    }
+  }
+}

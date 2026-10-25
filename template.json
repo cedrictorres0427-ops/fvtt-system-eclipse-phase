@@ -1,0 +1,1102 @@
+{
+  "Actor": {
+    "types": [
+      "character",
+      "npc"
+    ],
+    "templates": {
+      "aptitudes": {
+        "aptitudes": {
+          "cog": {
+            "base": 10,
+            "morphe": 0,
+            "label": "Cognition",
+            "abr": "COG",
+            "divers": 0
+          },
+          "coo": {
+            "base": 10,
+            "morphe": 0,
+            "label": "Coordination",
+            "abr": "COO",
+            "divers": 0
+          },
+          "int": {
+            "base": 10,
+            "morphe": 0,
+            "label": "Intuition",
+            "abr": "INT",
+            "divers": 0
+          },
+          "ref": {
+            "base": 10,
+            "morphe": 0,
+            "label": "Réflexes",
+            "abr": "RÉF",
+            "divers": 0
+          },
+          "ast": {
+            "base": 10,
+            "morphe": 0,
+            "label": "Astuce",
+            "abr": "AST",
+            "divers": 0
+          },
+          "som": {
+            "base": 10,
+            "morphe": 0,
+            "label": "Somatique",
+            "abr": "SOM",
+            "divers": 0
+          },
+          "vol": {
+            "base": 10,
+            "morphe": 0,
+            "label": "Volonté",
+            "abr": "VOL",
+            "divers": 0
+          }
+        }
+      },
+      "stats": {
+        "stats": {
+          "init": {
+            "value": 0,
+            "label": "Initiative"
+          },
+          "rap": {
+            "value": 1,
+            "label": "Rapidité",
+            "min": 1
+          },
+          "end": {
+            "value": 30,
+            "max": 30,
+            "label": "Endurance",
+            "morphe": 0
+          },
+          "sb": {
+            "value": 6,
+            "label": "Seuil de Blessure"
+          },
+          "sm": {
+            "value": 45,
+            "label": "Seuil de Mort"
+          },
+          "luc": {
+            "value": 20,
+            "max": 20,
+            "label": "Lucidité"
+          },
+          "st": {
+            "value": 4,
+            "label": "Seuil de Trauma"
+          },
+          "sa": {
+            "value": 40,
+            "label": "Seuil d'Aliénation"
+          },
+          "aud": {
+            "value": 5,
+            "max": 5,
+            "points": 5,
+            "label": "Audace"
+          },
+          "bd": {
+            "value": 1,
+            "label": "Bonus de Dommages"
+          },
+          "dommages": {
+            "value": 0,
+            "label": "Dommages"
+          },
+          "blessures": {
+            "value": 0,
+            "label": "Blessures"
+          },
+          "stress": {
+            "value": 0,
+            "label": "Stress"
+          },
+          "traumas": {
+            "value": 0,
+            "label": "Traumas"
+          },
+          "malus_actions": {
+            "value": 0,
+            "label": "Malus Blessures+Traumas"
+          },
+          "malus_init": {
+            "value": 0,
+            "label": "Malus Initiative"
+          }
+        }
+      },
+      "reputation": {
+        "reputation": {
+          "arep": {
+            "value": 0,
+            "label": "@-Rép (Anarchistes)"
+          },
+          "crep": {
+            "value": 0,
+            "label": "C-Rép (CivicNet)"
+          },
+          "erep": {
+            "value": 0,
+            "label": "E-Rép (VaguÉco)"
+          },
+          "frep": {
+            "value": 0,
+            "label": "F-Rép (Fame)"
+          },
+          "grep": {
+            "value": 0,
+            "label": "G-Rép (Guanxi)"
+          },
+          "irep": {
+            "value": 0,
+            "label": "I-Rép (L'Œil/Firewall)"
+          },
+          "rrep": {
+            "value": 0,
+            "label": "R-Rép (RRA)"
+          }
+        }
+      }
+    },
+    "character": {
+      "templates": [
+        "aptitudes",
+        "stats",
+        "reputation"
+      ],
+      "biographie": {
+        "concept": "",
+        "faction": "",
+        "historique": "",
+        "identite": "",
+        "age": "",
+        "motivations": "",
+        "notes": "",
+        "notes_idinfos": "",
+        "notes_sauvegarde": "",
+        "biographie": "",
+        "credits": 0,
+        "xp": 0
+      },
+      "morphe_actuel": {
+        "nom": "",
+        "type": "biomorphe",
+        "description": "",
+        "implants": "",
+        "avantages": "",
+        "desavantages": "",
+        "mobilite": "",
+        "armure": "",
+        "notes": "",
+        "bonus_init": 0,
+        "image_echelle": ""
+      },
+      "competences_actives": {
+        "armes_dispersion": {
+          "nom": "Armes à dispersion",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_distance_1": {
+          "nom": "",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Armes à distance exo.",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_distance_2": {
+          "nom": "",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Armes à distance exo.",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_guidage": {
+          "nom": "Armes à guidage",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_rayon": {
+          "nom": "Armes à rayon",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_cinetiques": {
+          "nom": "Armes cinétiques",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_contondantes": {
+          "nom": "Armes contondantes",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_jet": {
+          "nom": "Armes de jet",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_melee_1": {
+          "nom": "",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Armes de mêlée exo.",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_melee_2": {
+          "nom": "",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Armes de mêlée exo.",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_montees": {
+          "nom": "Armes montées",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "armes_tranchantes": {
+          "nom": "Armes tranchantes",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "assaut_psi": {
+          "nom": "Assaut psi",
+          "aptitude": "vol",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": true,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "chute_libre": {
+          "nom": "Chute libre",
+          "aptitude": "ref",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "combat_non_arme": {
+          "nom": "Combat non-armé",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "controle": {
+          "nom": "Contrôle",
+          "aptitude": "vol",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": true,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "controle_animal": {
+          "nom": "Contrôle animal",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "deguisement": {
+          "nom": "Déguisement",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "demolition": {
+          "nom": "Démolition",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": true,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "escalade": {
+          "nom": "Escalade",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "escamotage": {
+          "nom": "Escamotage",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "esquive": {
+          "nom": "Esquive",
+          "aptitude": "ref",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "fouille": {
+          "nom": "Fouille",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "imposture": {
+          "nom": "Imposture",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "infiltration": {
+          "nom": "Infiltration",
+          "aptitude": "coo",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "infosec": {
+          "nom": "Infosec",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": true,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "interface": {
+          "nom": "Interface",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "intimidation": {
+          "nom": "Intimidation",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "investigation": {
+          "nom": "Investigation",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "kinesique": {
+          "nom": "Kinésique",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "materiel_1": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Matériel : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "materiel_2": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Matériel : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "medecine_1": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Médecine : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "medecine_2": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Médecine : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "natation": {
+          "nom": "Natation",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "navigation": {
+          "nom": "Navigation",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "parkour": {
+          "nom": "Parkour",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "perception": {
+          "nom": "Perception",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "persuasion": {
+          "nom": "Persuasion",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "pilotage_1": {
+          "nom": "",
+          "aptitude": "ref",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Pilotage : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "pilotage_2": {
+          "nom": "",
+          "aptitude": "ref",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Pilotage : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "programmation": {
+          "nom": "Programmation",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": true,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "protocole": {
+          "nom": "Protocole",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "psychochirurgie": {
+          "nom": "Psychochirurgie",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "recherche": {
+          "nom": "Recherche",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "reseau_1": {
+          "nom": "",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Réseau : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "reseau_2": {
+          "nom": "",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Réseau : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "reseau_3": {
+          "nom": "",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Réseau : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "reseau_4": {
+          "nom": "",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "placeholder": "Réseau : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "sensation": {
+          "nom": "Sensation",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": true,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "subterfuge": {
+          "nom": "Subterfuge",
+          "aptitude": "ast",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "vol": {
+          "nom": "Vol",
+          "aptitude": "som",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "no_default": false,
+          "base": 0,
+          "bonus_hist": 0
+        }
+      },
+      "competences_connaissances": {
+        "art_1": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Art : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "art_2": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Art : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "art_3": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Art : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "art_4": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Art : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "interet_1": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Intérêt : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "interet_2": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Intérêt : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "interet_3": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Intérêt : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "interet_4": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Intérêt : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "langue_1": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Langue : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "langue_2": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Langue : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "langue_3": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Langue : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "langue_4": {
+          "nom": "",
+          "aptitude": "int",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Langue : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "profession_1": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Profession : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "profession_2": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Profession : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "profession_3": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Profession : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "profession_4": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Profession : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "theorie_1": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Théorie : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "theorie_2": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Théorie : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "theorie_3": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Théorie : ...",
+          "base": 0,
+          "bonus_hist": 0
+        },
+        "theorie_4": {
+          "nom": "",
+          "aptitude": "cog",
+          "bonus_morphe": 0,
+          "specialisation": "",
+          "autres_bonus": 0,
+          "placeholder": "Théorie : ...",
+          "base": 0,
+          "bonus_hist": 0
+        }
+      },
+      "passes_psi": "",
+      "aspects": {
+        "positifs": "",
+        "negatifs": ""
+      },
+      "armure": {
+        "energie": 0,
+        "cinetique": 0
+      },
+      "equipement": ""
+    },
+    "npc": {
+      "templates": [
+        "aptitudes",
+        "stats"
+      ],
+      "biographie": {
+        "faction": "",
+        "concept": "",
+        "notes": ""
+      },
+      "morphe_actuel": {
+        "nom": "",
+        "type": "biomorphe",
+        "avantages": ""
+      },
+      "armure": {
+        "energie": 0,
+        "cinetique": 0
+      },
+      "competences_npc": {}
+    }
+  },
+  "Item": {
+    "types": [
+      "morphe",
+      "equipement",
+      "aspect",
+      "passe_psi",
+      "arme_melee",
+      "arme_distance",
+      "armure_item",
+      "competence"
+    ],
+    "templates": {},
+    "morphe": {
+      "type_morphe": "biomorphe",
+      "name_en": "",
+      "image_echelle": "",
+      "description": "",
+      "endurance": 30,
+      "seuil_blessure": 6,
+      "max_aptitude": 30,
+      "aptitudes_bonus": {
+        "cog": 0,
+        "coo": 0,
+        "int": 0,
+        "ref": 0,
+        "ast": 0,
+        "som": 0,
+        "vol": 0
+      },
+      "mobilite": "",
+      "deplacement": "",
+      "modif_rapidite": 0,
+      "rapidite": 1,
+      "bonus_init": 0,
+      "armure": "",
+      "implants": "",
+      "avantages": "",
+      "desavantages": "",
+      "aspects": "",
+      "notes": "",
+      "cout_pp": 0,
+      "cout_credits": "",
+      "cout": "",
+      "disponibilite": "",
+      "aptitudes_max": {
+        "cog": 30,
+        "coo": 30,
+        "int": 30,
+        "ref": 30,
+        "ast": 30,
+        "som": 30,
+        "vol": 30
+      }
+    },
+    "equipement": {
+      "description": "",
+      "effets": "",
+      "bonus": "",
+      "categorie": "divers",
+      "cout": "moyen",
+      "disponibilite": "courant",
+      "quantite": 1,
+      "cout_credits": "",
+      "cout_notes": ""
+    },
+    "aspect": {
+      "type_aspect": "positif",
+      "cout_pp": 5,
+      "ego_ou_morphe": "ego",
+      "description": "",
+      "effet": ""
+    },
+    "passe_psi": {
+      "type_psi": "chi",
+      "activation": "",
+      "action": "Automatique",
+      "duree": "",
+      "portee": "",
+      "description": "",
+      "effet": "",
+      "strain": 0
+    },
+    "arme_melee": {
+      "description": "",
+      "competence": "armes_tranchantes",
+      "pa": 0,
+      "vd": "1d10 + 2",
+      "vd_moyenne": "",
+      "vd_som": true,
+      "notes": "",
+      "cout": "modique",
+      "cout_credits": "",
+      "cout_notes": ""
+    },
+    "arme_distance": {
+      "description": "",
+      "competence": "armes_cinetiques",
+      "pa": 0,
+      "vd": "2d10",
+      "vd_moyenne": "",
+      "modes": "SA, TR, FA",
+      "munitions": 0,
+      "munitions_max": 10,
+      "type_munition": "standard",
+      "portee_courte": 20,
+      "portee_moyenne": 50,
+      "portee_longue": 100,
+      "portee_extreme": 200,
+      "notes": "",
+      "cout": "bas",
+      "cout_credits": "",
+      "cout_notes": ""
+    },
+    "armure_item": {
+      "description": "",
+      "ca_energie": 0,
+      "ca_cinetique": 0,
+      "note_speciale": "",
+      "cout": "bas",
+      "cout_credits": "",
+      "cout_notes": ""
+    },
+    "competence": {
+      "aptitude": "cog",
+      "valeur": 0,
+      "specialisation": "",
+      "no_default": false,
+      "description": ""
+    }
+  }
+}
